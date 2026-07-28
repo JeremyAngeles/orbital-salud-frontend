@@ -2,48 +2,52 @@ import React from 'react';
 
 const Horarios = () => {
   return (
-    // Sin ondas aquí. Solo un fondo blanco limpio que recibe la onda de arriba y se apoya en la de abajo.
-    <section className="relative bg-white pt-16 pb-32 z-10">
+    // Fondo blanco limpio
+    <section className="relative bg-white py-20 lg:py-28 z-10">
       <div className="max-w-[1000px] mx-auto px-6 lg:px-8">
         
+        {/* Cabecera */}
         <div className="text-center mb-12">
-          <span className="text-[#a68a61] font-bold text-[11px] tracking-[0.25em] uppercase mb-4 block font-sans">
+          <span className="text-[#8a9096] font-bold text-[11px] tracking-[0.2em] uppercase mb-4 block font-sans">
             Horario de atención
           </span>
-          <h2 className="text-4xl md:text-[42px] font-serif text-os-dark mb-4 font-bold">
+          <h2 className="text-[36px] md:text-[42px] font-serif text-os-ink mb-4 font-bold leading-tight">
             Cuándo puedes visitarnos
           </h2>
-          <p className="text-os-ink text-[16px] font-sans font-medium">
+          <p className="text-[#6b7280] text-[16px] font-sans">
             Av. Brasil 2730, consultorio 1106 — Edificio Qualis, Pueblo Libre, Lima.
           </p>
         </div>
 
-        <div className="bg-[#f0ece4] rounded-[2rem] p-8 md:p-12 shadow-sm border border-black/5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* Contenedor principal gris claro */}
+        <div className="bg-[#F1F2F3] rounded-[32px] p-8 md:p-12 lg:p-14 shadow-sm border border-black/5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
             
+            {/* Lado Izquierdo: Días y Horas */}
             <div className="flex flex-col gap-4">
-              <div className="bg-white rounded-xl px-6 py-5 flex justify-between items-center shadow-sm">
-                <span className="font-bold text-os-dark font-sans text-[15px]">Lunes a Sábado</span>
-                <span className="text-os-ink font-sans text-[14px]">9:00 am – 6:00 pm</span>
+              <div className="bg-white rounded-2xl px-6 py-5 flex justify-between items-center shadow-sm border border-gray-100">
+                <span className="font-bold text-os-ink font-sans text-[15px]">Lunes a Sábado</span>
+                <span className="text-[#4a5056] font-sans text-[14px]">9:00 am – 6:00 pm</span>
               </div>
-              <div className="bg-white rounded-xl px-6 py-5 flex justify-between items-center shadow-sm">
-                <span className="font-bold text-os-dark font-sans text-[15px]">Domingos y feriados</span>
-                <span className="text-os-ink font-sans text-[14px]">Cerrado</span>
+              <div className="bg-white rounded-2xl px-6 py-5 flex justify-between items-center shadow-sm border border-gray-100">
+                <span className="font-bold text-os-ink font-sans text-[15px]">Domingos y feriados</span>
+                <span className="text-[#4a5056] font-sans text-[14px]">Cerrado</span>
               </div>
             </div>
 
+            {/* Lado Derecho: Textos y Botón WhatsApp */}
             <div>
-              <h3 className="text-2xl font-serif font-bold text-os-dark mb-4">
+              <h3 className="text-[22px] md:text-[26px] font-serif font-bold text-os-ink mb-4 leading-tight">
                 ¿Prefieres coordinar directo?
               </h3>
-              <p className="text-[15px] font-sans text-os-ink leading-relaxed mb-8">
-                Escríbenos por WhatsApp y te confirmamos el horario disponible según la especialidad que necesites.
+              <p className="text-[14.5px] font-sans text-[#4a5056] leading-[1.65] mb-8">
+                Escríbenos por WhatsApp y te confirmamos el horario disponible según la especialidad que necesites — algunas atienden también de forma virtual.
               </p>
               <a 
                 href="https://wa.me/51999999999" 
                 target="_blank" 
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#2A3D36] text-white px-8 py-3.5 rounded-full font-sans font-semibold hover:bg-[#1f2d28] transition-colors"
+                className="inline-flex items-center justify-center gap-2.5 bg-[#256b3c] text-white px-8 py-3.5 rounded-full font-sans text-[15px] font-bold hover:bg-[#1f5a33] transition-colors shadow-[0_8px_20px_-6px_rgba(37,107,60,0.4)]"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>

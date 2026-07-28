@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Testimonios from '../components/Testimonios';
 import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 
 const EquipoPage = ({ equipoData, loading, error }) => {
   // === ESTADO PARA EL MODAL ===
@@ -176,6 +176,10 @@ const EquipoPage = ({ equipoData, loading, error }) => {
 
           </div>
         </section>
+
+        {/* AQUÍ ESTÁN LOS TESTIMONIOS, INTEGRADOS PERFECTAMENTE */}
+        <Testimonios />
+
       </main>
 
       {/* ========================================== */}
@@ -307,7 +311,6 @@ const EquipoPage = ({ equipoData, loading, error }) => {
         }
       `}</style>
       
-      <WhatsAppButton />
       <Footer />
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
-import Testimonios from '../components/Testimonios';
+import TablaComparativa from '../components/TablaComparativa';
 import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 
 // --- Datos ---
 const ESPECIALIDADES = [
@@ -319,8 +318,7 @@ const ReservarCitaPage = () => {
           </div>
         </div>
       </main>
-      <Testimonios />
-      <WhatsAppButton/>
+      <TablaComparativa />
       <Footer />
     </div>
   );

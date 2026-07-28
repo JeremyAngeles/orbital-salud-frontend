@@ -1,128 +1,215 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 const Especialidades = () => {
+  const scrollContainerRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      
+      // 1. Calculamos el ancho exacto de una tarjeta dinámicamente + el gap (gap-6 = 24px)
+      const cardWidth = container.firstElementChild.offsetWidth;
+      const gap = 24;
+      const scrollStep = cardWidth + gap;
+
+      // 2. Vemos dónde estamos y cuál es el tope máximo que se puede scrollear
+      const currentScroll = container.scrollLeft;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+
+      // 3. Calculamos la nueva posición
+      let newScroll = direction === 'left' 
+        ? currentScroll - scrollStep 
+        : currentScroll + scrollStep;
+
+      // 4. EL FRENO: Evitamos que se vaya a los bordes blancos infinitos
+      if (newScroll <= 0) newScroll = 0;
+      if (newScroll >= maxScroll) newScroll = maxScroll;
+
+      // 5. Usamos scrollTo (ir a posición exacta) en lugar de scrollBy (sumar a lo ciego)
+      container.scrollTo({ 
+        left: newScroll, 
+        behavior: 'smooth' 
+      });
+    }
+  };
+
   const especialidades = [
     {
       id: 1,
       titulo: "Endocrinología",
-      descripcion: "Diabetes, tiroides, obesidad, hormonas.",
+      subtitulo: "ADULTOS Y ADOLESCENTES",
+      descripcion: "El corazón de Orbital Salud. Diagnóstico y tratamiento de diabetes, tiroides, obesidad y desórdenes hormonales — siempre buscando la causa metabólica de fondo, no solo el síntoma.",
+      etiquetas: ["Diabetes", "Tiroides", "Obesidad", "Resistencia a la insulina"],
       icono: (
-        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8 8a4 4 0 1 0 0 8h8a4 4 0 1 0 0-8H8z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8 8c2.5 0 5.5 8 8 8" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M16 8c-2.5 0-5.5 8-8 8" />
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.75">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 8c-1.5-2-4-2-5-1s-1.5 4-1 6 3 4 5 3a2 2 0 013 0c2 1 4.5 1 5-3s.5-5-1-6-3.5-1-5 1c-.5.5-1 .5-1 0z" />
         </svg>
       )
     },
     {
       id: 2,
       titulo: "Endocrinología Pediátrica",
-      descripcion: "Prevención desde la infancia.",
+      subtitulo: "NIÑOS Y ADOLESCENTES",
+      descripcion: "Cuidamos el crecimiento y el metabolismo desde temprano: talla baja, pubertad adelantada, obesidad infantil y diabetes en los más chicos, con un enfoque preventivo.",
+      etiquetas: ["Crecimiento", "Pubertad", "Obesidad infantil", "Diabetes"],
       icono: (
-        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H11M17 7V13" />
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.75">
+          <circle cx="12" cy="12" r="9" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 005 0" />
         </svg>
       )
     },
     {
       id: 3,
       titulo: "Nutrición",
-      descripcion: "Planes sostenibles, no dietas temporales.",
+      subtitulo: "CON EVALUACIÓN INBODY INCLUIDA",
+      descripcion: "Planes de alimentación personalizados según tu composición corporal real, orientados a resultados sostenibles en el tiempo — nada de dietas extremas ni temporales.",
+      etiquetas: ["Plan personalizado", "InBody", "Seguimiento"],
       icono: (
-        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l-4.5-4.5M12 19.5l4.5-4.5m-1.5-6a4.5 4.5 0 10-6 0v3h6v-3z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15h15" />
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.75">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 10a8 8 0 0016 0H4zm2 8h12" />
         </svg>
       )
     },
     {
       id: 4,
       titulo: "Dermatología",
-      descripcion: "La piel también habla de tus hormonas.",
+      subtitulo: "PIEL Y HORMONAS",
+      descripcion: "La piel refleja tu equilibrio hormonal. Tratamos acné, caída del cabello y manchas relacionadas con desórdenes metabólicos y endocrinos, no solo de forma estética.",
+      etiquetas: ["Acné hormonal", "Caída de cabello", "Manchas"],
       icono: (
-        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 7.5v6m3-3h-6" />
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.75">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4c-1.5 0-2.5 1-2.5 2.5V8c0 1.5-1 2.5-2.5 2.5C8.5 10.5 9.5 11.5 9.5 13v1.5c0 1.5 1 2.5 2.5 2.5" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 10c0-1.5 1-2.5 2.5-2.5" />
         </svg>
       )
     },
     {
       id: 5,
       titulo: "Cardiología",
-      descripcion: "Prevención del riesgo cardiovascular.",
+      subtitulo: "PREVENCIÓN CARDIOVASCULAR",
+      descripcion: "Cuidamos tu corazón frente al riesgo que traen la diabetes, la obesidad y el síndrome metabólico, con evaluación y prevención pensadas a largo plazo.",
+      etiquetas: ["Presión arterial", "Colesterol", "Riesgo cardiovascular"],
       icono: (
-        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.75">
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h5l2.5-4 4 9 2.5-4h4" />
         </svg>
       )
     },
     {
       id: 6,
       titulo: "Bioimpedancia InBody",
-      descripcion: "Composición corporal: grasa, músculo y agua en minutos.",
+      subtitulo: "INCLUIDO EN TUS CONSULTAS",
+      descripcion: "Análisis de grasa, músculo, agua y grasa visceral con precisión médica en menos de un minuto. Incluido sin costo en Endocrinología y Nutrición.",
+      etiquetas: ["% Grasa", "Masa muscular", "Grasa visceral"],
       icono: (
-        <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.75">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 16h12a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm6-6v2m-3-2h6" />
         </svg>
       )
     }
   ];
 
   return (
-    <section id="especialidades" className="relative bg-white pt-20 md:pt-24 pb-20 md:pb-28">
+    <section id="especialidades" className="relative bg-[#efe8d8] py-20 md:py-28 overflow-hidden">
       
-      <div className="absolute -top-[1px] left-0 w-full overflow-hidden leading-none z-0">
-        <svg className="relative block w-full h-[40px] md:h-[80px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path 
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-            className="text-os-beige fill-current"
-          ></path>
-        </svg>
-      </div>
+      <style>
+        {`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}
+      </style>
 
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1180px] mx-auto px-8 relative z-10">
         
-        <div className="text-center mb-10 md:mb-16 relative z-10">
-          <span className="text-[#a68a61] font-bold text-[10px] md:text-[11px] tracking-[0.25em] uppercase mb-3 md:mb-4 block font-sans">
+        {/* Cabecera ajustada con el título un poco más pequeño */}
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-[#8a9096] font-bold text-[11px] tracking-[0.2em] uppercase mb-4 block font-sans">
             Especialidades
           </span>
-          <h2 className="text-[28px] sm:text-4xl md:text-5xl lg:text-[54px] font-serif text-os-dark mb-3 md:mb-5 leading-tight">
-            Todo tu metabolismo, en un solo<br className="hidden md:block" /> equipo
+          {/* Se redujo el tamaño de texto a 32px en móvil y 40px en desktop */}
+          <h2 className="text-[32px] md:text-[40px] font-serif font-semibold text-os-ink mb-4 leading-tight">
+            Todo tu metabolismo, <span className="text-[#256b3c] italic">en un solo equipo</span>
           </h2>
-          <p className="text-os-ink text-[14px] md:text-[17px] font-sans font-medium px-2">
+          <p className="text-[#6b7280] text-[16px] font-sans">
             Cinco especialidades. Un mismo objetivo: tu balance metabólico y hormonal.
           </p>
         </div>
 
-        {/* AQUÍ ESTÁ LA MAGIA: grid-cols-2 (para móvil) y md:grid-cols-3 (para desktop) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+        {/* Contenedor Carrusel */}
+        <div 
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto gap-6 pb-8 hide-scrollbar snap-x snap-mandatory"
+        >
           {especialidades.map((item) => (
             <div 
               key={item.id} 
-              // Puse paddings mucho más pequeños en móvil (p-4) para que la caja no explote, y se agranda en PC (md:p-10)
-              className="bg-white rounded-2xl md:rounded-[2rem] p-4 md:p-10 text-center shadow-md hover:shadow-xl md:hover:shadow-2xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 border border-black/5 group flex flex-col items-center"
+              // Se cambió hover:bg-[#256b3c] a hover:bg-[#2e4b34]
+              className="group bg-white hover:bg-[#2e4b34] transition-colors duration-300 cursor-pointer rounded-[24px] p-8 md:p-10 text-left shadow-sm border border-black/5 flex flex-col flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-start"
             >
-              {/* Ícono más pequeñito en celular */}
-              <div className="bg-os-dark w-12 h-12 md:w-[72px] md:h-[72px] rounded-xl md:rounded-2xl mx-auto flex items-center justify-center text-white mb-3 md:mb-6 shadow-sm transition-transform duration-300 group-hover:scale-105 shrink-0">
+              {/* Ícono */}
+              <div className="bg-[#2d4b35] group-hover:bg-white text-white group-hover:text-[#2e4b34] w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 transition-colors duration-300">
                 {item.icono}
               </div>
               
-              {/* Textos ajustados con leading-tight para que si caen en 2 líneas no se vean feos */}
-              <h3 className="font-serif text-[15px] sm:text-[17px] md:text-2xl text-os-dark mb-1.5 md:mb-3 font-bold leading-tight">
+              {/* Textos */}
+              <h3 className="font-serif text-[22px] text-os-ink group-hover:text-white mb-1 font-bold transition-colors duration-300">
                 {item.titulo}
               </h3>
-              <p className="text-os-ink text-[11.5px] sm:text-[13px] md:text-[14px] leading-snug md:leading-relaxed font-sans">
+              <p className="text-[#8a9096] group-hover:text-white/80 text-[10px] font-bold uppercase tracking-wider mb-4 font-sans transition-colors duration-300">
+                {item.subtitulo}
+              </p>
+              <p className="text-[#4a5056] group-hover:text-white/90 text-[14px] leading-[1.65] font-sans flex-grow transition-colors duration-300">
                 {item.descripcion}
               </p>
+
+              {/* Etiquetas / Píldoras */}
+              <div className="flex flex-wrap gap-2 mt-8">
+                {item.etiquetas.map((etiqueta, i) => (
+                  <span 
+                    key={i} 
+                    className="bg-[#F1F2F3] group-hover:bg-white/20 text-[#4a5056] group-hover:text-white px-3 py-1.5 rounded-full text-[11px] font-semibold font-sans transition-colors duration-300"
+                  >
+                    {etiqueta}
+                  </span>
+                ))}
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-10 md:mt-16 text-center">
-          <button className="border border-os-dark text-os-dark px-6 md:px-10 py-3 md:py-3.5 rounded-full font-semibold hover:bg-os-dark hover:text-os-beige transition-colors font-sans text-[13px] md:text-[15px]">
+        {/* Controles y Botón Final */}
+        <div className="flex flex-col items-center mt-4">
+          
+          <div className="flex gap-4 mb-8">
+            <button 
+              onClick={() => scroll('left')}
+              className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-os-ink"
+              aria-label="Anterior especialidad"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors text-os-ink"
+              aria-label="Siguiente especialidad"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          <a href="/especialidades" className="border border-[#2d4b35] text-[#2d4b35] px-8 py-3.5 rounded-full font-semibold hover:bg-[#2d4b35] hover:text-white transition-colors font-sans text-[14px]">
             Ver todas las especialidades
-          </button>
+          </a>
         </div>
 
       </div>

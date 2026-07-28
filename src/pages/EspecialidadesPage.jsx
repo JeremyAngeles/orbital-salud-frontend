@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 const EspecialidadesPage = () => {
   const especialidadesDetalle = [
     {
@@ -145,7 +144,6 @@ const EspecialidadesPage = () => {
           );
         })}
       </section>
-       <WhatsAppButton/>
       <Footer />
     </div>
   );

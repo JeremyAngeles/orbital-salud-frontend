@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
 
 const ContactoPage = () => {
   const [openFaq, setOpenFaq] = useState(null);
@@ -128,8 +127,6 @@ const ContactoPage = () => {
         </section>
 
       </main>
-      
-      <WhatsAppButton/>
       <Footer />
     </div>
   );

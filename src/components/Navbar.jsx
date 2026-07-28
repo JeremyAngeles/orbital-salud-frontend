@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  // Scroll suave al cargar la página si hay un hash (ej. #resultados)
   useEffect(() => {
     if (location.hash) {
       setTimeout(() => {
@@ -19,43 +20,88 @@ const Navbar = () => {
     }
   }, [location]);
 
-  const handleHashClick = (e, id) => {
+  // Función para manejar clics en enlaces con # (Anclas)
+  const handleHashClick = (e, id, targetPath) => {
     setIsOpen(false);
-    if (location.pathname === '/') {
+    // Si ya estamos en la página correcta, solo hacemos scroll suave
+    if (location.pathname === targetPath) {
       e.preventDefault(); 
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        window.history.pushState(null, '', `/#${id}`);
+        // Actualizamos la URL sin recargar
+        window.history.pushState(null, '', `${targetPath}#${id}`);
       }
     }
   };
 
   const closeMenu = () => setIsOpen(false);
 
+  // === FUNCIÓN PARA DETERMINAR EL COLOR DEL ENLACE ACTIVO ===
+  const getLinkClass = (path, hash = '') => {
+    // Verifica si la ruta y el hash coinciden con la ubicación actual
+    const isActive = location.pathname === path && location.hash === hash;
+    const baseClass = "text-[14.5px] font-sans whitespace-nowrap transition-colors";
+    
+    // Si está activo: Verde principal y bold. Si no: Gris oscuro y semibold.
+    return `${baseClass} ${isActive ? "text-[#256b3c] font-bold" : "text-os-ink font-semibold hover:text-[#256b3c]"}`;
+  };
+
+  // Versión para el menú móvil
+  const getMobileLinkClass = (path, hash = '') => {
+    const isActive = location.pathname === path && location.hash === hash;
+    const baseClass = "font-bold text-[17px] border-b border-black/5 pb-3 font-sans transition-colors block";
+    return `${baseClass} ${isActive ? "text-[#256b3c]" : "text-os-ink"}`;
+  };
+
   return (
-    <nav className="sticky top-0 z-50 bg-os-beige/85 backdrop-blur-md border-b border-os-dark/10">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-3">
+    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-black/5 transition-all duration-300">
+      <div className="max-w-[1180px] mx-auto px-8 py-2.5">
         
         {/* === VERSIÓN ESCRITORIO === */}
-        <div className="hidden lg:flex justify-between items-center w-full">
-          <div className="flex gap-4 xl:gap-6 items-center justify-start">
-            <Link to="/" onClick={() => window.scrollTo(0,0)} className="text-os-ink font-medium hover:text-os-medium transition-colors text-[18px] font-sans whitespace-nowrap">Inicio</Link>
-            <Link to="/especialidades" className="text-os-ink font-medium hover:text-os-medium transition-colors text-[18px] font-sans whitespace-nowrap">Especialidades</Link>
+        <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] items-center w-full gap-5">
+          
+          {/* Lado Izquierdo */}
+          <div className="flex gap-7 items-center justify-start">
+            <Link to="/" onClick={() => window.scrollTo(0,0)} className={getLinkClass('/', '')}>
+              Inicio
+            </Link>
+            <Link to="/especialidades" className={getLinkClass('/especialidades', '')}>
+              Especialidades
+            </Link>
+            <Link to="/inbody" onClick={() => window.scrollTo(0,0)} className={getLinkClass('/inbody', '')}>
+              InBody
+            </Link>
+            <Link 
+              to="/inbody#resultados" 
+              onClick={(e) => handleHashClick(e, 'resultados', '/inbody')} 
+              className={getLinkClass('/inbody', '#resultados')}
+            >
+              Resultados
+            </Link>
           </div>
           
-          <div className="flex justify-center shrink-0 mx-4">
+          {/* Logo Central */}
+          <div className="flex justify-center shrink-0">
             <Link to="/" onClick={() => window.scrollTo(0,0)}>
-              <img src="/logo.png" alt="Logo Orbital Salud" className="h-[68px] object-contain shrink-0" />
+              <img src="/logo.png" alt="Logo Orbital Salud" className="h-[64px] w-auto object-contain shrink-0" />
             </Link>
           </div>
 
-          <div className="flex gap-4 xl:gap-6 items-center justify-end">
-            <Link to="/equipo" className="text-os-ink font-medium hover:text-os-medium transition-colors text-[18px] font-sans whitespace-nowrap">Equipo</Link>
-            {/* AQUÍ ESTÁ EL CAMBIO: Ahora apunta a la página de productos */}
-            <Link to="/productos" className="text-os-ink font-medium hover:text-os-medium transition-colors text-[18px] font-sans whitespace-nowrap">Tienda</Link>
-            <Link to="/contacto" className="text-os-ink font-medium hover:text-os-medium transition-colors text-[18px] font-sans whitespace-nowrap">Contacto</Link>
-            <Link to="/reservar-cita" className="bg-os-dark hover:bg-os-medium text-os-beige px-7 py-2.5 rounded-full text-[18px] font-semibold transition-colors font-sans whitespace-nowrap shrink-0 min-w-max">
+          {/* Lado Derecho */}
+          <div className="flex gap-6 items-center justify-end">
+            <Link to="/equipo" className={getLinkClass('/equipo', '')}>
+              Equipo
+            </Link>
+            <Link to="/productos" className={getLinkClass('/productos', '')}>
+              Tienda
+            </Link>
+            <Link to="/contacto" className={getLinkClass('/contacto', '')}>
+              Contacto
+            </Link>
+            
+            {/* Botón de Reserva (Color actualizado) */}
+            <Link to="/reservar-cita" className="bg-[#256b3c] hover:bg-[#1e542f] text-white px-6 py-[11px] rounded-full text-[14px] font-bold transition-all shadow-md hover:shadow-lg font-sans whitespace-nowrap shrink-0 ml-1">
               Reservar cita
             </Link>
           </div>
@@ -79,14 +125,17 @@ const Navbar = () => {
 
         {/* === MENÚ DESPLEGABLE MÓVIL === */}
         {isOpen && (
-          <div className="lg:hidden flex flex-col gap-4 pt-4 pb-4 border-t border-os-dark/10 mt-3">
-            <Link to="/" onClick={() => { closeMenu(); window.scrollTo(0,0); }} className="text-os-ink font-medium text-[20px] font-sans">Inicio</Link>
-            <Link to="/especialidades" onClick={closeMenu} className="text-os-ink font-medium text-[20px] font-sans">Especialidades</Link>
-            <Link to="/equipo" onClick={closeMenu} className="text-os-ink font-medium text-[20px] font-sans">Equipo</Link>
-            {/* AQUÍ ESTÁ EL CAMBIO MÓVIL: Ahora apunta a la página de productos */}
-            <Link to="/productos" onClick={closeMenu} className="text-os-ink font-medium text-[20px] font-sans">Tienda</Link>
-            <Link to="/contacto" onClick={closeMenu} className="text-os-ink font-medium text-[20px] font-sans">Contacto</Link>
-            <Link to="/reservar-cita" onClick={closeMenu} className="bg-os-dark text-center text-os-beige px-6 py-3 rounded-full text-[16px] font-semibold transition-colors font-sans whitespace-nowrap mt-2">
+          <div className="lg:hidden flex flex-col gap-4 pt-4 pb-4 border-t border-black/5 mt-3 animate-fadeIn">
+            <Link to="/" onClick={() => { closeMenu(); window.scrollTo(0,0); }} className={getMobileLinkClass('/', '')}>Inicio</Link>
+            <Link to="/especialidades" onClick={closeMenu} className={getMobileLinkClass('/especialidades', '')}>Especialidades</Link>
+            <Link to="/inbody" onClick={() => { closeMenu(); window.scrollTo(0,0); }} className={getMobileLinkClass('/inbody', '')}>InBody</Link>
+            <Link to="/inbody#resultados" onClick={(e) => handleHashClick(e, 'resultados', '/inbody')} className={getMobileLinkClass('/inbody', '#resultados')}>Resultados</Link>
+            <Link to="/equipo" onClick={closeMenu} className={getMobileLinkClass('/equipo', '')}>Equipo</Link>
+            <Link to="/productos" onClick={closeMenu} className={getMobileLinkClass('/productos', '')}>Tienda</Link>
+            <Link to="/contacto" onClick={closeMenu} className={getMobileLinkClass('/contacto', '')}>Contacto</Link>
+            
+            {/* Botón de Reserva Móvil (Color actualizado) */}
+            <Link to="/reservar-cita" onClick={closeMenu} className="bg-[#256b3c] text-center text-white px-6 py-3.5 rounded-full text-[16px] font-bold shadow-md mt-4 font-sans">
               Reservar cita
             </Link>
           </div>
