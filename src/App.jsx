@@ -8,7 +8,7 @@ import ContactoPage from './pages/ContactoPage';
 import ReservarCitaPage from './pages/ReservarCitaPage'; 
 import ProductosPage from './pages/ProductosPage'; 
 import ProductoDetalle from './pages/ProductoDetalle'; 
-import InBodyPage from './pages/InBodyPage'; 
+import InBodyPage from "./pages/InbodyPage";
 import Footer from './components/Footer'; 
 
 // Componentes del Panel de Administración
