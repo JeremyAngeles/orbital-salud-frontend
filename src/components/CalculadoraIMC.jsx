@@ -39,63 +39,68 @@ const CalculadoraIMC = () => {
   };
 
   return (
-    <section className="max-w-[1000px] mx-auto px-6 lg:px-8 mb-10 w-full">
-      {/* CAMBIO AQUÍ: Fondo actualizado al verde exacto #2e4b34 */}
-      <div className="bg-[#2e4b34] rounded-[24px] p-8 md:p-12 shadow-lg">
-        <div className="max-w-3xl">
+    <section className="max-w-[1000px] mx-auto px-6 lg:px-8 mb-12 w-full font-raleway">
+      {/* Card más horizontal y menos grueso (padding vertical reducido) */}
+      <div className="bg-[#2e4b34] rounded-[28px] px-6 py-6 md:px-10 md:py-7 shadow-md">
+        <div>
           
-          <h2 className="text-[26px] md:text-[32px] font-serif font-bold mb-3 leading-tight !text-white">
-            ¿Eres candidato/a para nuestro <span className="italic !text-[#D9C8B1]">programa de peso?</span>
+          {/* Título y subtítulo más compactos */}
+          <h2 className="font-raleway text-[24px] md:text-[28px] font-bold mb-2 leading-tight text-white">
+            ¿Eres candidato/a para nuestro <span className="font-raleway italic text-[#D9C8B1] font-normal">programa de peso?</span>
           </h2>
-          <p className="text-[13px] md:text-[14px] font-sans mb-8 leading-relaxed max-w-2xl !text-white opacity-90">
+          
+          <p className="font-raleway text-[12px] md:text-[13px] mb-5 leading-relaxed max-w-4xl text-white opacity-85">
             Calcula tu IMC como primer paso. Es solo referencial — la evaluación real la hace la especialista, midiendo también tu composición corporal con InBody.
           </p>
 
-          <form onSubmit={calcularImc} className="flex flex-col sm:flex-row items-end gap-5 mb-8">
-            <div className="w-full sm:w-44">
-              <label className="block text-[12px] font-bold !text-[#A6B6AA] mb-2">Peso (kg)</label>
+          {/* Formulario en línea horizontal */}
+          <form onSubmit={calcularImc} className="flex flex-col sm:flex-row items-end gap-4">
+            <div className="w-full sm:w-48">
+              <label className="font-raleway block text-[11px] font-bold text-white/70 mb-1">Peso (kg)</label>
               <input 
                 type="number" 
                 value={peso} 
                 onChange={(e) => setPeso(e.target.value)}
-                className="w-full bg-[#415D48] border border-[#597560] rounded-xl px-4 py-3 !text-white text-[15px] outline-none focus:border-[#D9C8B1] transition-colors placeholder:text-[#A6B6AA]/50"
-                placeholder="Ej. 60"
+                className="font-raleway w-full bg-[#243c29] border border-white/20 rounded-xl px-3 py-2.5 text-white text-[14px] outline-none focus:border-[#D9C8B1] transition-colors placeholder:text-white/30"
+                placeholder="Ej. 78"
                 required
               />
             </div>
-            <div className="w-full sm:w-44">
-              <label className="block text-[12px] font-bold !text-[#A6B6AA] mb-2">Talla (cm)</label>
+            <div className="w-full sm:w-48">
+              <label className="font-raleway block text-[11px] font-bold text-white/70 mb-1">Talla (cm)</label>
               <input 
                 type="number" 
                 value={talla} 
                 onChange={(e) => setTalla(e.target.value)}
-                className="w-full bg-[#415D48] border border-[#597560] rounded-xl px-4 py-3 !text-white text-[15px] outline-none focus:border-[#D9C8B1] transition-colors placeholder:text-[#A6B6AA]/50"
-                placeholder="Ej. 164"
+                className="font-raleway w-full bg-[#243c29] border border-white/20 rounded-xl px-3 py-2.5 text-white text-[14px] outline-none focus:border-[#D9C8B1] transition-colors placeholder:text-white/30"
+                placeholder="Ej. 165"
                 required
               />
             </div>
-            <button type="submit" className="w-full sm:w-auto bg-[#237039] border border-black !text-white font-bold text-[15px] px-8 py-3 rounded-[14px] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-[2px] active:shadow-none transition-all">
+            <button type="submit" className="font-raleway w-full sm:w-auto bg-[#256b3c] border border-white/15 text-white font-bold text-[14px] px-6 py-2.5 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:bg-[#1f5a33] active:translate-y-[1px] transition-all">
               Calcular mi IMC
             </button>
           </form>
 
+          {/* Resultados de la calculadora */}
           {imcResult && (
-            <div className="border border-white/20 rounded-[16px] p-6 md:p-8 animate-fadeIn">
-              <span className={`font-serif text-[42px] font-bold block mb-1 leading-none ${imcResult.colorClass}`}>
+            <div className="border border-white/20 rounded-[18px] p-5 md:p-6 animate-fadeIn bg-[#243c29]/50 mt-5">
+              <span className={`font-raleway text-[36px] font-bold block mb-0.5 leading-none ${imcResult.colorClass}`}>
                 {imcResult.valor}
               </span>
-              <span className="font-bold text-[16px] block mb-3 !text-white">
+              <span className="font-raleway font-bold text-[15px] block mb-2 text-white">
                 {imcResult.categoria}
               </span>
-              <p className="text-[14px] leading-relaxed mb-6 max-w-2xl !text-white opacity-90">
+              <p className="font-raleway text-[13px] leading-relaxed mb-4 max-w-3xl text-white opacity-90">
                 {imcResult.mensaje}
               </p>
-              {/* CAMBIO AQUÍ: Icono del botón ahora usa el color #2e4b34 para combinar */}
-              <a href="/agenda" className="inline-flex items-center gap-2 bg-white !text-[#2e4b34] font-bold text-[14px] px-6 py-2.5 rounded-full hover:bg-gray-100 transition-colors shadow-sm">
+              
+              <a href="/agenda" className="font-raleway inline-flex items-center gap-2 bg-white text-[#2e4b34] font-bold text-[13px] px-5 py-2 rounded-full hover:bg-gray-100 transition-colors shadow-sm">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.74.45 3.37 1.23 4.8L2 22l5.35-1.19A9.952 9.952 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm4.3 14.15c-.23.63-1.32 1.22-1.83 1.3-.51.08-1.18.25-3.32-.64-2.57-1.07-4.22-3.67-4.35-3.84-.13-.17-1.04-1.38-1.04-2.63 0-1.25.65-1.87.89-2.12.23-.25.51-.31.68-.31.17 0 .34 0 .49.01.16.01.37-.06.57.42.21.51.72 1.77.79 1.9.06.13.11.28.02.45-.08.17-.13.28-.25.42-.13.15-.27.32-.38.45-.11.15-.24.31-.1.55.13.23.6 1.01 1.29 1.63.9.8 1.67 1.04 1.9 1.16.23.11.37.09.51-.06.15-.17.65-.75.82-1.01.17-.25.34-.21.55-.13.21.08 1.34.63 1.57.75.23.11.38.17.44.27.06.11.06.63-.17 1.26z"></path></svg>
                 Agenda tu evaluación
               </a>
-              <p className="text-[11px] !text-[#A6B6AA] italic mt-6 border-t border-white/10 pt-4">
+              
+              <p className="font-raleway text-[11px] text-white/60 italic mt-4 border-t border-white/10 pt-3">
                 El IMC no distingue grasa de músculo. Por eso en Orbital medimos tu composición corporal real con InBody antes de cualquier plan.
               </p>
             </div>

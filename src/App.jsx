@@ -57,7 +57,7 @@ function AppContent() {
     </div>
   );
 }
-
+ 
 // Componente Principal envuelto en el CartProvider
 function App() {
   return (
