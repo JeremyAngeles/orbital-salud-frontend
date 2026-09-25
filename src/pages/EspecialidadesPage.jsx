@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+
 const EspecialidadesPage = () => {
   const especialidadesDetalle = [
     {
@@ -51,24 +52,23 @@ const EspecialidadesPage = () => {
   ];
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen font-raleway">
       
       {/* === HEADER DE LA PÁGINA === */}
       <section className="bg-os-beige pt-20 pb-24 md:pt-28 md:pb-32 px-6 lg:px-8 text-center relative overflow-hidden">
         <div className="max-w-3xl mx-auto relative z-10">
-          <span className="text-[#a68a61] font-bold text-[11px] md:text-[13px] tracking-[0.25em] uppercase mb-4 block font-sans">
+          <span className="text-[#a68a61] font-bold text-[11px] md:text-[13px] tracking-[0.25em] uppercase mb-4 block font-raleway">
             Nuestros Servicios
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-os-dark mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-os-dark mb-6 leading-tight font-raleway">
             Nuestras <br className="md:hidden"/> Especialidades
           </h1>
-          <p className="text-os-ink text-[16px] md:text-[18px] font-sans font-medium leading-relaxed">
+          <p className="text-os-ink text-[16px] md:text-[18px] font-medium leading-relaxed font-raleway">
             Conoce en detalle cómo cada una de nuestras áreas médicas se integra para tratar la causa raíz de tu malestar y devolverte el balance.
           </p>
         </div>
         
         {/* === ONDA INFERIOR CORREGIDA === */}
-        {/* Usamos el SVG que dibuja la base plana abajo para que el blanco conecte perfecto */}
         <div className="absolute -bottom-[1px] left-0 w-full overflow-hidden leading-none z-0">
           <svg viewBox="0 0 1440 120" className="block w-full h-[50px] md:h-[90px]" preserveAspectRatio="none">
             <path 
@@ -82,7 +82,6 @@ const EspecialidadesPage = () => {
       {/* === CONTENIDO ZIG-ZAG === */}
       <section className="py-20 md:py-32 px-6 lg:px-8 max-w-[1200px] mx-auto space-y-24 md:space-y-40">
         {especialidadesDetalle.map((esp, index) => {
-          // Si el índice es impar, invertimos la fila en pantallas medianas o grandes
           const isReverse = index % 2 !== 0;
 
           return (
@@ -103,38 +102,38 @@ const EspecialidadesPage = () => {
                 <div className={`absolute -bottom-6 ${isReverse ? '-right-4 md:-left-8' : '-left-4 md:-right-8'} bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-black/5 max-w-[260px] z-10`}>
                   <img src={esp.fotoDoctor} alt={esp.doctor} className="w-14 h-14 rounded-full object-cover bg-os-beige shrink-0" />
                   <div>
-                    <p className="text-[#a68a61] text-[10px] font-bold tracking-wider uppercase">A cargo de</p>
-                    <p className="text-os-dark font-serif font-bold leading-tight">{esp.doctor}</p>
+                    <p className="text-[#a68a61] text-[10px] font-bold tracking-wider uppercase font-raleway">A cargo de</p>
+                    <p className="text-os-dark font-bold leading-tight font-raleway">{esp.doctor}</p>
                   </div>
                 </div>
               </div>
 
               {/* BLOQUE DE TEXTO */}
               <div className="w-full md:w-1/2 mt-8 md:mt-0">
-                <h2 className="text-3xl md:text-4xl font-serif text-os-dark mb-6 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-bold text-os-dark mb-6 leading-tight font-raleway">
                   {esp.titulo}
                 </h2>
                 
                 <div className="mb-8">
-                  <h3 className="text-os-dark font-bold font-sans text-[15px] md:text-[17px] mb-2 flex items-center gap-2">
+                  <h3 className="text-os-dark font-bold text-[15px] md:text-[17px] mb-2 flex items-center gap-2 font-raleway">
                     <span className="w-2 h-2 rounded-full bg-[#a68a61]"></span> ¿Qué es?
                   </h3>
-                  <p className="text-os-ink text-[15px] md:text-[16px] leading-relaxed font-sans">
+                  <p className="text-os-ink text-[15px] md:text-[16px] leading-relaxed font-raleway">
                     {esp.queEs}
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="text-os-dark font-bold font-sans text-[15px] md:text-[17px] mb-2 flex items-center gap-2">
+                  <h3 className="text-os-dark font-bold text-[15px] md:text-[17px] mb-2 flex items-center gap-2 font-raleway">
                     <span className="w-2 h-2 rounded-full bg-[#a68a61]"></span> ¿Cómo puede ayudarte?
                   </h3>
-                  <p className="text-os-ink text-[15px] md:text-[16px] leading-relaxed font-sans">
+                  <p className="text-os-ink text-[15px] md:text-[16px] leading-relaxed font-raleway">
                     {esp.comoAyuda}
                   </p>
                 </div>
 
                 <div className="mt-10">
-                   <Link to="/#agenda" className="inline-block bg-os-dark text-white px-8 py-3.5 rounded-full font-sans font-semibold text-[14px] hover:bg-os-medium transition-colors shadow-md">
+                   <Link to="/#agenda" className="inline-block bg-os-dark text-white px-8 py-3.5 rounded-full font-semibold text-[14px] hover:bg-os-medium transition-colors shadow-md font-raleway">
                      Agendar en {esp.titulo.split(' ')[0]}
                    </Link>
                 </div>

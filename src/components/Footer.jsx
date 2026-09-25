@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#F1F2F3] text-os-ink-soft font-sans pt-[72px] border-t border-black/5">
+    <footer className="bg-[#F1F2F3] text-os-ink-soft font-raleway pt-[72px] border-t border-black/5">
       <div className="max-w-[1180px] mx-auto px-8">
         
         {/* === GRID PRINCIPAL (3 Columnas) === */}
@@ -18,7 +18,7 @@ const Footer = () => {
                 className="h-[44px] w-auto object-contain mb-[16px]" 
               />
             </Link>
-            <p className="text-[14px] leading-relaxed max-w-[280px]">
+            <p className="text-[14px] leading-relaxed max-w-[280px] font-raleway">
               Centro de metabolismo y obesidad.<br />
               Bajamos de peso tratando la causa metabólica y hormonal, no solo la balanza — para adultos y niños. Av. Brasil 2730, consultorio 1106, Edificio Qualis, Pueblo Libre, Lima.
             </p>
@@ -26,23 +26,23 @@ const Footer = () => {
 
           {/* Columna 2: Enlaces */}
           <div>
-            <h5 className="text-os-ink font-serif text-[15px] font-semibold mb-[18px]">
+            <h5 className="text-os-ink font-raleway text-[15px] font-bold mb-[18px]">
               Enlaces
             </h5>
-            <ul className="flex flex-col gap-[11px] text-[14px]">
+            <ul className="flex flex-col gap-[11px] text-[14px] font-raleway">
               <li><Link to="/especialidades" className="hover:text-os-accent transition-colors">Especialidades</Link></li>
               <li><Link to="/equipo" className="hover:text-os-accent transition-colors">Equipo</Link></li>
               <li><Link to="/productos" className="hover:text-os-accent transition-colors">Tienda</Link></li>
-              <li><Link to="/faq" className="hover:text-os-accent transition-colors">Preguntas frecuentes</Link></li>
+              <li><Link to="/contacto" className="hover:text-os-accent transition-colors">Preguntas frecuentes</Link></li>
             </ul>
           </div>
 
           {/* Columna 3: Contacto */}
           <div>
-            <h5 className="text-os-ink font-serif text-[15px] font-semibold mb-[18px]">
+            <h5 className="text-os-ink font-raleway text-[15px] font-bold mb-[18px]">
               Contacto
             </h5>
-            <ul className="flex flex-col gap-[11px] text-[14px]">
+            <ul className="flex flex-col gap-[11px] text-[14px] font-raleway">
               <li>WhatsApp: 981 009 863</li>
               <li>Av. Brasil 2730, of. 1106 — Edif. Qualis</li>
               <li>Pueblo Libre, Lima</li>
@@ -54,18 +54,18 @@ const Footer = () => {
         </div>
 
         {/* === COPYRIGHT Y REDES (Bottom) === */}
-        <div className="flex flex-col md:flex-row justify-between items-center py-[26px] text-[12.5px]">
+        <div className="flex flex-col md:flex-row justify-between items-center py-[26px] text-[12.5px] font-raleway">
           <p>
             © {new Date().getFullYear()} Orbital Salud. Todos los derechos reservados.
           </p>
           
           {/* Enlaces de Redes en línea texto */}
-          <div className="flex gap-2 mt-4 md:mt-0 items-center font-medium">
-            <a href="#" className="hover:text-os-accent transition-colors">Instagram</a>
+          <div className="flex gap-2 mt-4 md:mt-0 items-center font-bold">
+            <a href="#" className="hover:text-os-accent transition-colors font-raleway">Instagram</a>
             <span className="text-os-ink-soft/50">·</span>
-            <a href="#" className="hover:text-os-accent transition-colors">TikTok</a>
+            <a href="#" className="hover:text-os-accent transition-colors font-raleway">TikTok</a>
             <span className="text-os-ink-soft/50">·</span>
-            <a href="#" className="hover:text-os-accent transition-colors">WhatsApp</a>
+            <a href="#" className="hover:text-os-accent transition-colors font-raleway">WhatsApp</a>
           </div>
         </div>
 

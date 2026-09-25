@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home'; 
 import EspecialidadesPage from './pages/EspecialidadesPage'; 
 import EquipoPage from './pages/EquipoPage';
+import NoticiasPage from './pages/NoticiasPage'; // <--- IMPORTAMOS LA NUEVA PÁGINA
 import ContactoPage from './pages/ContactoPage';
 import ReservarCitaPage from './pages/ReservarCitaPage'; 
 import ProductosPage from './pages/ProductosPage'; 
@@ -26,13 +27,14 @@ function AppContent() {
   const esRutaAdmin = location.pathname.startsWith('/admin');
 
   return (
-    <div className="font-sans antialiased bg-os-beige min-h-screen flex flex-col relative">
+  
+    <div className="font-raleway antialiased bg-[#efe8d8] min-h-screen flex flex-col relative">
       
       {/* Si NO es ruta de admin, muestra el Navbar y los botones globales */}
       {!esRutaAdmin && (
         <>
           <Navbar />
-          <BotonesFlotantes /> {/* <--- AQUÍ VIVEN TUS BOTONES AHORA */}
+          <BotonesFlotantes /> 
         </>
       )}
       
@@ -43,6 +45,7 @@ function AppContent() {
           <Route path="/inbody" element={<InBodyPage />} /> 
           <Route path="/especialidades" element={<EspecialidadesPage />} />
           <Route path="/equipo" element={<EquipoPage />} />
+          <Route path="/noticias" element={<NoticiasPage />} /> {/* <--- NUEVA RUTA AGREGADA */}
           <Route path="/contacto" element={<ContactoPage />} /> 
           <Route path="/reservar-cita" element={<ReservarCitaPage />} /> 
           <Route path="/productos" element={<ProductosPage />} /> 

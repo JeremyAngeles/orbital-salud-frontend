@@ -5,7 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Scroll suave al cargar la página si hay un hash (ej. #resultados)
+  // Scroll suave al cargar la página si hay un hash
   useEffect(() => {
     if (location.hash) {
       setTimeout(() => {
@@ -20,16 +20,13 @@ const Navbar = () => {
     }
   }, [location]);
 
-  // Función para manejar clics en enlaces con # (Anclas)
   const handleHashClick = (e, id, targetPath) => {
     setIsOpen(false);
-    // Si ya estamos en la página correcta, solo hacemos scroll suave
     if (location.pathname === targetPath) {
       e.preventDefault(); 
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Actualizamos la URL sin recargar
         window.history.pushState(null, '', `${targetPath}#${id}`);
       }
     }
@@ -39,60 +36,52 @@ const Navbar = () => {
 
   // === FUNCIÓN PARA DETERMINAR EL COLOR DEL ENLACE ACTIVO ===
   const getLinkClass = (path, hash = '') => {
-    // Verifica si la ruta y el hash coinciden con la ubicación actual
     const isActive = location.pathname === path && location.hash === hash;
-    const baseClass = "text-[14.5px] font-sans whitespace-nowrap transition-colors";
-    
-    // Si está activo: Verde principal y bold. Si no: Gris oscuro y semibold.
+    const baseClass = "text-[14.5px] font-raleway whitespace-nowrap transition-colors flex items-center";
     return `${baseClass} ${isActive ? "text-[#256b3c] font-bold" : "text-os-ink font-semibold hover:text-[#256b3c]"}`;
   };
 
   // Versión para el menú móvil
   const getMobileLinkClass = (path, hash = '') => {
     const isActive = location.pathname === path && location.hash === hash;
-    const baseClass = "font-bold text-[17px] border-b border-black/5 pb-3 font-sans transition-colors block";
+    const baseClass = "font-bold text-[17px] border-b border-black/5 pb-3 font-raleway transition-colors flex items-center";
     return `${baseClass} ${isActive ? "text-[#256b3c]" : "text-os-ink"}`;
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-black/5 transition-all duration-300">
-      <div className="max-w-[1180px] mx-auto px-8 py-2.5">
+    <nav className="sticky top-0 z-50 bg-[#F9F6F0]/90 backdrop-blur-md transition-all duration-300">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8 py-2.5">
         
         {/* === VERSIÓN ESCRITORIO === */}
-        <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] items-center w-full gap-5">
+        {/* grid-cols-[1fr_auto_1fr] asegura que el logo (auto) siempre esté 100% en el centro de la pantalla */}
+        <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] items-center w-full">
           
-          {/* Lado Izquierdo */}
-          <div className="flex gap-7 items-center justify-start">
+          {/* Lado Izquierdo (Agrupado hacia el centro con justify-end) */}
+          <div className="flex gap-5 xl:gap-8 items-center justify-end pr-6 xl:pr-10">
             <Link to="/" onClick={() => window.scrollTo(0,0)} className={getLinkClass('/', '')}>
               Inicio
             </Link>
             <Link to="/especialidades" className={getLinkClass('/especialidades', '')}>
               Especialidades
             </Link>
-            <Link to="/inbody" onClick={() => window.scrollTo(0,0)} className={getLinkClass('/inbody', '')}>
-              InBody
+            <Link to="/equipo" className={getLinkClass('/equipo', '')}>
+              Equipo
             </Link>
-            <Link 
-              to="/inbody#resultados" 
-              onClick={(e) => handleHashClick(e, 'resultados', '/inbody')} 
-              className={getLinkClass('/inbody', '#resultados')}
-            >
-              Resultados
+            {/* NUEVA PÁGINA: Noticias */}
+            <Link to="/noticias" className={getLinkClass('/noticias', '')}>
+              Noticias
             </Link>
           </div>
           
-          {/* Logo Central */}
+          {/* Logo Central (Inamovible en el medio) */}
           <div className="flex justify-center shrink-0">
             <Link to="/" onClick={() => window.scrollTo(0,0)}>
               <img src="/logo.png" alt="Logo Orbital Salud" className="h-[64px] w-auto object-contain shrink-0" />
             </Link>
           </div>
 
-          {/* Lado Derecho */}
-          <div className="flex gap-6 items-center justify-end">
-            <Link to="/equipo" className={getLinkClass('/equipo', '')}>
-              Equipo
-            </Link>
+          {/* Lado Derecho (Agrupado hacia el centro con justify-start) */}
+          <div className="flex gap-5 xl:gap-7 items-center justify-start pl-6 xl:pl-10">
             <Link to="/productos" className={getLinkClass('/productos', '')}>
               Tienda
             </Link>
@@ -100,9 +89,17 @@ const Navbar = () => {
               Contacto
             </Link>
             
-            {/* Botón de Reserva (Color actualizado) */}
-            <Link to="/reservar-cita" className="bg-[#256b3c] hover:bg-[#1e542f] text-white px-6 py-[11px] rounded-full text-[14px] font-bold transition-all shadow-md hover:shadow-lg font-sans whitespace-nowrap shrink-0 ml-1">
-              Reservar cita
+            {/* PORTAL */}
+            <Link to="/login" className="flex items-center text-[14.5px] font-raleway whitespace-nowrap transition-colors text-[#256b3c] font-bold hover:text-[#1e542f]">
+              <svg className="w-[18px] h-[18px] mr-1.5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              Portal
+            </Link>
+            
+            {/* Botón de Reserva */}
+            <Link to="/reservar-cita" className="bg-[#256b3c] hover:bg-[#1e542f] text-white px-6 py-[11px] rounded-full text-[14px] font-bold transition-all shadow-md hover:shadow-lg font-raleway whitespace-nowrap shrink-0 ml-1">
+              Agendar evaluación
             </Link>
           </div>
         </div>
@@ -112,7 +109,7 @@ const Navbar = () => {
           <Link to="/" onClick={() => window.scrollTo(0,0)}>
             <img src="/logo.png" alt="Logo Orbital Salud" className="h-[52px] object-contain shrink-0" />
           </Link>
-          <button onClick={() => setIsOpen(!isOpen)} className="text-os-dark p-2 focus:outline-none shrink-0" aria-label="Abrir menú">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-[#1e3325] p-2 focus:outline-none shrink-0" aria-label="Abrir menú">
             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -128,15 +125,25 @@ const Navbar = () => {
           <div className="lg:hidden flex flex-col gap-4 pt-4 pb-4 border-t border-black/5 mt-3 animate-fadeIn">
             <Link to="/" onClick={() => { closeMenu(); window.scrollTo(0,0); }} className={getMobileLinkClass('/', '')}>Inicio</Link>
             <Link to="/especialidades" onClick={closeMenu} className={getMobileLinkClass('/especialidades', '')}>Especialidades</Link>
-            <Link to="/inbody" onClick={() => { closeMenu(); window.scrollTo(0,0); }} className={getMobileLinkClass('/inbody', '')}>InBody</Link>
-            <Link to="/inbody#resultados" onClick={(e) => handleHashClick(e, 'resultados', '/inbody')} className={getMobileLinkClass('/inbody', '#resultados')}>Resultados</Link>
             <Link to="/equipo" onClick={closeMenu} className={getMobileLinkClass('/equipo', '')}>Equipo</Link>
+            
+            {/* NUEVA PÁGINA: Noticias (Móvil) */}
+            <Link to="/noticias" onClick={closeMenu} className={getMobileLinkClass('/noticias', '')}>Noticias</Link>
+            
             <Link to="/productos" onClick={closeMenu} className={getMobileLinkClass('/productos', '')}>Tienda</Link>
             <Link to="/contacto" onClick={closeMenu} className={getMobileLinkClass('/contacto', '')}>Contacto</Link>
             
-            {/* Botón de Reserva Móvil (Color actualizado) */}
-            <Link to="/reservar-cita" onClick={closeMenu} className="bg-[#256b3c] text-center text-white px-6 py-3.5 rounded-full text-[16px] font-bold shadow-md mt-4 font-sans">
-              Reservar cita
+            {/* PORTAL MÓVIL */}
+            <Link to="/login" onClick={closeMenu} className="font-bold text-[17px] border-b border-black/5 pb-3 font-raleway transition-colors flex items-center text-[#256b3c]">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              Portal
+            </Link>
+            
+            {/* Botón de Reserva Móvil */}
+            <Link to="/reservar-cita" onClick={closeMenu} className="bg-[#256b3c] text-center text-white px-6 py-3.5 rounded-full text-[16px] font-bold shadow-md mt-4 font-raleway block w-full">
+              Agendar evaluación
             </Link>
           </div>
         )}
