@@ -8,19 +8,19 @@ const ServiciosGaleria = () => {
       id: 1,
       titulo: "Consulta personalizada",
       subtitulo: "Endocrinología Pediátrica · Dra. Alcázar",
-      imagen: "/servicio_1.jpg"
+      imagen: "/consulta-personalizada.jpg"
     },
     {
       id: 2,
       titulo: "Consulta presencial",
       subtitulo: "Endocrinología · Dra. Antonella Zúñiga",
-      imagen: "/servicio_2.jpg"
+      imagen: "/consulta-presencial.jpg"
     },
     {
       id: 3,
       titulo: "Dermatología",
       subtitulo: "Dra. Karen Ángeles",
-      imagen: "/servicio_3.jpg"
+      imagen: "/dermatologia-imagen.jpg"
     }
   ];
 

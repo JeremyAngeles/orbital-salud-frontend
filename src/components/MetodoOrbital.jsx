@@ -1,196 +1,260 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
-const MetodoOrbital = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+const pasosAtencion = [
+  {
+    paso: 1,
+    titulo: "Evaluación inicial",
+    descripcion: "Conversamos sobre tu historia, hábitos, estilo de vida y objetivos.",
+    icono: "/icon-evaluacion.png",
+    imagen: "/Evaluación inicial-imagen.jpg"
+  },
+  {
+    paso: 2,
+    titulo: "Laboratorio y bioimpedancia",
+    descripcion: "Medimos lo que importa, no solo el peso. Incluye análisis de laboratorio y evaluación de composición corporal con InBody.",
+    icono: "/icon-Laboratorio.png",
+    imagen: "/imagne-laboratorio.jpg"
+  },
+  {
+    paso: 3,
+    titulo: "Revisión médica",
+    descripcion: "El equipo analiza tus resultados para definir el diagnóstico y el mejor plan de tratamiento.",
+    icono: "/icon-Revisión.png",
+    imagen: "/Revisión médica-imagen.jpg"
+  },
+  {
+    paso: 4,
+    titulo: "Inicio del plan",
+    descripcion: "Diseñamos un plan personalizado, con metas claras y realistas, que se adapta estrictamente a tu estilo de vida.",
+    icono: "/icon-Inicio del plan.png",
+    imagen: "/Inicio del plan-imagen.jpg"
+  },
+  {
+    paso: 5,
+    titulo: "Seguimiento",
+    descripcion: "Controles periódicos y ajustes en equipo para asegurar tu progreso a largo plazo de manera completamente sostenible.",
+    icono: "/icon-Seguimiento.png",
+    imagen: "/Seguimiento-imagen.jpg"
+  }
+];
 
-  // Las 5 etapas del Método Orbital basadas en tus capturas
-  const steps = [
-    {
-      num: 1,
-      title: "Evaluación inicial",
-      desc: "Conversamos sobre tu historia, hábitos, estilo de vida y objetivos.",
-      img: "/doctora_principal.jpg"
-    },
-    {
-      num: 2,
-      title: "Laboratorio y bioimpedancia",
-      desc: "Medimos lo que importa, no solo el peso. Incluye análisis de laboratorio y evaluación de composición corporal con InBody.",
-      img: "/caso2_despues.jpg"
-    },
-    {
-      num: 3,
-      title: "Revisión médica",
-      desc: "El equipo analiza tus resultados para definir el diagnóstico y el mejor plan de tratamiento.",
-      img: "/caso1_despues.jpg"
-    },
-    {
-      num: 4,
-      title: "Inicio del plan",
-      desc: "Diseñamos un plan personalizado, con metas claras y realistas, que se adapta a tu estilo de vida.",
-      img: "/caso1_antes.jpg"
-    },
-    {
-      num: 5,
-      title: "Seguimiento",
-      desc: "Controles periódicos y ajustes en equipo para asegurar tu progreso a largo plazo.",
-      img: "/caso2_antes.jpg"
-    }
-  ];
+const ProcesoAtencion = () => {
+  const carouselRef = useRef(null);
 
-  // Desplazamiento automático (auto-slide) cada 4 segundos
+  // === LÓGICA PARA AUTO-SCROLL ===
   useEffect(() => {
-    if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % steps.length);
+      if (carouselRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          const scrollAmount = window.innerWidth < 768 ? carouselRef.current.offsetWidth : carouselRef.current.offsetWidth / 3;
+          carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }
     }, 4000);
+
     return () => clearInterval(interval);
-  }, [isPaused, steps.length]);
+  }, []);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? steps.length - 1 : prev - 1));
+  // === CONTROLES MANUALES (FLECHAS) ===
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      const scrollAmount = window.innerWidth < 768 ? carouselRef.current.offsetWidth : carouselRef.current.offsetWidth / 3;
+      carouselRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % steps.length);
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      const scrollAmount = window.innerWidth < 768 ? carouselRef.current.offsetWidth : carouselRef.current.offsetWidth / 3;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
   };
-
-  // En PC mostramos 3 tarjetas a la vez, calculamos el índice inicial seguro (máximo 2)
-  const desktopStartIndex = Math.min(currentIndex, steps.length - 3);
 
   return (
-    <section className="w-full font-raleway py-20 bg-white overflow-hidden">
+    <section className="w-full bg-[#F9F6F0] font-raleway relative z-10 py-16 md:py-20">
       
-      {/* Animación suave de transición */}
-      <style>
-        {`
-          @keyframes fadeInSlide {
-            0% { opacity: 0; transform: translateX(15px); }
-            100% { opacity: 1; transform: translateX(0); }
-          }
-          .animate-fade-slide {
-            animation: fadeInSlide 0.6s ease-in-out forwards;
-          }
-        `}
-      </style>
-
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 text-center mb-12">
-        <span className="font-raleway text-[#8a9096] font-bold text-[11px] tracking-[0.2em] uppercase mb-3 block">
-          EL MÉTODO ORBITAL
-        </span>
-        <h2 className="font-raleway text-[32px] md:text-[44px] text-[#1e3325] font-bold leading-tight max-w-3xl mx-auto">
-          Todo tu caso, coordinado en un <span className="font-raleway text-[#256b3c] italic">mismo lugar</span>
-        </h2>
+      {/* =========================================
+          ONDA SUPERIOR (Con configuración gruesa)
+          ========================================= */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-0">
+        <svg 
+          viewBox="0 0 1440 80" 
+          preserveAspectRatio="none" 
+          className="w-full h-[40px] md:h-[70px] block"
+        >
+          {/* Fondo blanco para conectar suavemente con la sección anterior */}
+          <path 
+            d="M0,0 L1440,0 L1440,40 C1000,80 400,10 0,50 Z" 
+            fill="#ffffff"
+          />
+          {/* Línea Verde Oscura */}
+          <path 
+            d="M0,50 C400,10 1000,80 1440,40" 
+            fill="none" 
+            stroke="#5c6e4e" 
+            strokeWidth="10" 
+            opacity="0.9"
+          />
+          {/* Línea Verde Clara */}
+          <path 
+            d="M0,40 C450,80 950,20 1440,50" 
+            fill="none" 
+            stroke="#8b9a7b" 
+            strokeWidth="5" 
+            opacity="0.9"
+          />
+        </svg>
       </div>
 
-      <div 
-        className="max-w-[1200px] mx-auto px-4 lg:px-8"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
+      <div className="max-w-[1250px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
         
-        {/* VISTA EN CELULAR: Muestra 1 tarjeta a la vez y se desplaza sola por las 5 */}
-        <div className="block md:hidden mb-8">
-          <div key={currentIndex} className="animate-fade-slide bg-white rounded-[28px] p-6 shadow-[0_20px_50px_rgba(17,35,24,0.12)] border border-gray-100 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="font-raleway w-7 h-7 rounded-full bg-[#112318] text-white text-[12px] font-bold flex items-center justify-center shrink-0">
-                  {steps[currentIndex].num}
-                </div>
-                <h3 className="font-raleway text-[18px] font-bold text-[#1e3325]">
-                  {steps[currentIndex].title}
-                </h3>
-              </div>
-              <p className="font-raleway text-[#6b7280] text-[13.5px] leading-relaxed mb-6">
-                {steps[currentIndex].desc}
-              </p>
-            </div>
-            <div className="rounded-[20px] overflow-hidden h-[210px] bg-gray-100 border border-gray-100">
-              <img 
-                src={steps[currentIndex].img} 
-                alt={steps[currentIndex].title} 
-                className="w-full h-full object-cover object-center"
-                onError={(e) => { e.target.src = 'https://picsum.photos/600/400?random=' + steps[currentIndex].num }}
-              />
-            </div>
-          </div>
+        {/* === CABECERA === */}
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <span className="text-[#6b7280] font-bold text-[11px] md:text-[13px] tracking-[0.25em] uppercase block mb-4 font-raleway">
+            EL MÉTODO ORBITAL
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-[46px] font-bold text-[#1e3325] leading-tight mb-6 font-raleway">
+            Todo tu caso, coordinado <span className="text-[#256b3c] italic font-normal">en un <br className="hidden md:block"/>mismo lugar</span>
+          </h2>
         </div>
 
-        {/* VISTA EN PC / TABLET: Muestra 3 tarjetas en fila con la sombra elegante */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8 mb-10">
-          {steps.slice(desktopStartIndex, desktopStartIndex + 3).map((step, idx) => (
-            <div 
-              key={desktopStartIndex + idx} 
-              className="animate-fade-slide bg-white rounded-[28px] p-6 shadow-[0_20px_50px_rgba(17,35,24,0.12)] border border-gray-100 flex flex-col justify-between transition-all duration-500 hover:-translate-y-1"
-            >
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="font-raleway w-7 h-7 rounded-full bg-[#112318] text-white text-[12px] font-bold flex items-center justify-center shrink-0">
-                    {step.num}
+        {/* === CONTENEDOR DEL CARRUSEL === */}
+        <div className="relative">
+          <div 
+            ref={carouselRef}
+            className="flex overflow-x-auto items-stretch gap-6 snap-x snap-mandatory hide-scrollbar pb-8 pt-2 px-2 -mx-2"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            
+            {pasosAtencion.map((item) => (
+              <div
+                key={item.paso}
+                className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-center bg-white rounded-[32px] p-6 md:p-8 flex flex-col group border border-black/5 hover:border-[#256b3c]/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_-15px_rgba(37,107,60,0.25)] transition-all duration-500 transform hover:-translate-y-2 overflow-hidden cursor-default relative"
+              >
+                
+                {/* 1. SECCIÓN SUPERIOR: Ícono + Título */}
+                <div className="flex items-center gap-5 mb-5">
+                  <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <img
+                      src={item.icono}
+                      alt={`Paso ${item.paso}`}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
-                  <h3 className="font-raleway text-[18px] font-bold text-[#1e3325]">
-                    {step.title}
+                  <h3 className="text-[#1e3325] font-bold text-[19px] md:text-[21px] leading-tight font-raleway group-hover:text-[#256b3c] transition-colors duration-300">
+                    {item.titulo}
                   </h3>
                 </div>
-                <p className="font-raleway text-[#6b7280] text-[13.5px] leading-relaxed mb-6 min-h-[48px]">
-                  {step.desc}
-                </p>
-              </div>
-              <div className="rounded-[20px] overflow-hidden h-[210px] bg-gray-100 border border-gray-100">
-                <img 
-                  src={step.img} 
-                  alt={step.title} 
-                  className="w-full h-full object-cover object-center"
-                  onError={(e) => { e.target.src = 'https://picsum.photos/600/400?random=' + step.num }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Controles de Paginación (Flechas y 5 puntos indicadores) */}
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <button 
-            onClick={handlePrev} 
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-[#256b3c] hover:text-white hover:border-[#256b3c] transition-colors"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-          </button>
-          
-          <div className="flex gap-2">
-            {steps.map((_, idx) => (
-              <button 
-                key={idx} 
-                onClick={() => setCurrentIndex(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${currentIndex === idx ? 'w-8 bg-[#256b3c]' : 'w-2.5 bg-gray-300'}`}
-              />
+                {/* 2. SECCIÓN MEDIA: Descripción */}
+                <p className="text-[#6b7280] text-[14.5px] md:text-[15.5px] leading-relaxed font-raleway mb-8 flex-grow">
+                  {item.descripcion}
+                </p>
+
+                {/* 3. SECCIÓN INFERIOR: Fotografía */}
+                <div className="w-full aspect-[16/10] rounded-[20px] overflow-hidden bg-[#e9e6df] relative">
+                  <img
+                    src={item.imagen}
+                    alt={item.titulo}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/400x300/efe8d8/256b3c?text=' + encodeURIComponent(item.titulo);
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
+                </div>
+
+                {/* === ACENTO INFERIOR ANIMADO === */}
+                <div className="absolute bottom-0 left-0 w-full h-1.5 bg-[#256b3c] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-b-[32px]"></div>
+                
+              </div>
             ))}
+
           </div>
 
-          <button 
-            onClick={handleNext} 
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-[#256b3c] hover:text-white hover:border-[#256b3c] transition-colors"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-          </button>
-        </div>
+          {/* === CONTROLES INFERIORES: FLECHAS Y BOTÓN === */}
+          <div className="flex flex-col items-center gap-8 mt-6">
+            
+            {/* Flechas de Navegación */}
+            <div className="flex gap-4">
+              <button 
+                onClick={scrollLeft}
+                className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-[#1e3325] hover:bg-[#256b3c] hover:text-white hover:border-[#256b3c] hover:shadow-md transition-all focus:outline-none"
+                aria-label="Anterior"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+              </button>
+              <button 
+                onClick={scrollRight}
+                className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-[#1e3325] hover:bg-[#256b3c] hover:text-white hover:border-[#256b3c] hover:shadow-md transition-all focus:outline-none"
+                aria-label="Siguiente"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+              </button>
+            </div>
 
-        {/* Botón Inferior: Agendar mi evaluación */}
-        <div className="flex justify-center">
-          <a 
-            href="/contacto" 
-            className="font-raleway bg-[#256b3c] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#1f5a33] transition-all shadow-[0_12px_24px_-10px_rgba(37,107,60,0.5)] flex items-center justify-center gap-2.5 text-[15px]"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M13.601 2.399A7.968 7.968 0 0 0 8 0C3.582 0 0 3.582 0 8a7.95 7.95 0 0 0 1.121 4.094L.133 15.867l3.905-1.02A7.95 7.95 0 0 0 8 16c4.418 0 8-3.582 8-8a7.96 7.96 0 0 0-2.399-5.601zM8 14.653a6.59 6.59 0 0 1-3.364-1.22l-.241-.143-2.502.655.666-2.438-.157-.25A6.574 6.574 0 0 1 1.408 8c0-3.626 2.951-6.577 6.592-6.577 3.626 0 6.577 2.951 6.577 6.577 0 3.626-2.951 6.577-6.577 6.577zm3.46-4.736c-.19-.095-1.121-.553-1.295-.616-.174-.063-.301-.095-.428.095-.127.19-.489.616-.599.742-.111.127-.222.143-.413.048-.19-.095-.8-.295-1.523-.935-.562-.498-.941-1.111-1.052-1.302-.111-.19-.012-.293.083-.388.084-.084.19-.222.285-.332.095-.111.127-.19.19-.317.063-.127.032-.238-.016-.332-.048-.095-.428-1.032-.587-1.413-.156-.37-.313-.32-.428-.326-.111-.006-.238-.006-.365-.006-.127 0-.332.048-.506.238-.174.19-.665.65-.665 1.587 0 .936.681 1.841.776 1.968.095.127 1.341 2.049 3.242 2.868.452.194.805.31 1.08.397.453.144.865.123 1.19.075.364-.054 1.121-.458 1.279-.901.159-.443.159-.822.111-.901-.048-.079-.174-.127-.365-.222z"/>
-            </svg>
-            Agendar mi evaluación
-          </a>
+            {/* Botón de WhatsApp */}
+            <a 
+              href="https://wa.me/51987654321" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-[#256b3c] text-white px-8 py-3.5 rounded-full font-bold text-[14px] md:text-[15px] hover:bg-[#1a4a2a] transition-all shadow-[0_4px_14px_rgba(37,107,60,0.39)] font-raleway mb-12"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              Agendar mi evaluación
+            </a>
+
+          </div>
+
         </div>
 
       </div>
+
+      {/* =========================================
+          ONDA INFERIOR (Con configuración gruesa y volteada)
+          ========================================= */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
+        <svg 
+          viewBox="0 0 1440 80" 
+          preserveAspectRatio="none" 
+          className="w-full h-[40px] md:h-[70px] block -scale-y-100"
+        >
+          {/* Fondo para conectar suavemente con la sección siguiente (blanco) */}
+          <path 
+            d="M0,0 L1440,0 L1440,40 C1000,80 400,10 0,50 Z" 
+            fill="#ffffff"
+          />
+          {/* Línea Verde Oscura */}
+          <path 
+            d="M0,50 C400,10 1000,80 1440,40" 
+            fill="none" 
+            stroke="#5c6e4e" 
+            strokeWidth="10" 
+            opacity="0.9"
+          />
+          {/* Línea Verde Clara */}
+          <path 
+            d="M0,40 C450,80 950,20 1440,50" 
+            fill="none" 
+            stroke="#8b9a7b" 
+            strokeWidth="5" 
+            opacity="0.9"
+          />
+        </svg>
+      </div>
+
+      <style>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 };
 
-export default MetodoOrbital;
+export default ProcesoAtencion;

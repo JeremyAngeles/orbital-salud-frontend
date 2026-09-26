@@ -42,8 +42,8 @@ const DiferenciaOrbital = () => {
 
   return (
     /* hidden lg:block asegura que SOLO aparezca en pantallas de PC */
-    <section className="w-full font-raleway py-24 bg-[#f8f9fa] hidden lg:block overflow-hidden">
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
+    <section className="w-full font-raleway pt-24 pb-20 bg-[#f8f9fa] hidden lg:block overflow-hidden relative z-10">
+      <div className="max-w-[1100px] mx-auto px-6 lg:px-8 relative z-10 mb-16">
         
         {/* Cabecera */}
         <div className="text-center mb-14">
@@ -122,6 +122,8 @@ const DiferenciaOrbital = () => {
         </div>
 
       </div>
+
+
     </section>
   );
 };

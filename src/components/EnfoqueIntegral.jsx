@@ -39,7 +39,7 @@ const EnfoqueIntegral = () => {
         <div className="relative flex justify-center lg:justify-end">
           <div className="relative rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(17,35,24,0.15)] border-[6px] border-white max-w-[500px] w-full">
             <img 
-              src="/doctora_principal.jpg" 
+              src="/tradicional.jpg" 
               alt="Equipo Orbital Salud" 
               className="w-full h-[420px] object-cover object-top"
               onError={(e) => { e.target.src = 'https://picsum.photos/600/700?random=10' }}

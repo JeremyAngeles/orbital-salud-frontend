@@ -39,7 +39,7 @@ const Hero = () => {
           <div className="relative inline-block w-full max-w-[560px]">
             <div className="absolute top-4 left-4 w-full h-full bg-[#F1F2F3] rounded-[24px] z-0"></div>
             <img 
-              src="/doctora_principal.jpg" 
+              src="/hero-home.jpg" 
               alt="Doctoras en Orbital Salud" 
               className="relative z-10 w-full h-auto object-cover rounded-[24px] border-[6px] border-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.12)]"
             />

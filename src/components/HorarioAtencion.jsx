@@ -2,11 +2,45 @@ import React from 'react';
 
 const HorarioAtencion = () => {
   return (
-    <section className="w-full font-raleway py-24 bg-white overflow-hidden">
-      <div className="max-w-[1050px] mx-auto px-6 lg:px-8">
+    <section className="w-full font-raleway pt-24 pb-20 bg-[#F9F6F0] overflow-hidden relative z-10">
+      
+      {/* =========================================
+          ONDA SUPERIOR
+          ========================================= */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-0">
+        <svg 
+          viewBox="0 0 1440 80" 
+          preserveAspectRatio="none" 
+          className="w-full h-[40px] md:h-[70px] block"
+        >
+          {/* Fondo para conectar suavemente con la sección anterior (blanco) */}
+          <path 
+            d="M0,0 L1440,0 L1440,40 C1000,80 400,10 0,50 Z" 
+            fill="#ffffff"
+          />
+          {/* Línea Verde Oscura */}
+          <path 
+            d="M0,50 C400,10 1000,80 1440,40" 
+            fill="none" 
+            stroke="#5c6e4e" 
+            strokeWidth="10" 
+            opacity="0.9"
+          />
+          {/* Línea Verde Clara */}
+          <path 
+            d="M0,40 C450,80 950,20 1440,50" 
+            fill="none" 
+            stroke="#8b9a7b" 
+            strokeWidth="5" 
+            opacity="0.9"
+          />
+        </svg>
+      </div>
+
+      <div className="max-w-[1050px] mx-auto px-6 lg:px-8 relative z-10">
         
         {/* Cabecera */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 mt-6">
           <span className="font-raleway text-[#8a9096] font-bold text-[11px] tracking-[0.2em] uppercase mb-3 block">
             HORARIO DE ATENCIÓN
           </span>

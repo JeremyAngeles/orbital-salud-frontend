@@ -2,7 +2,7 @@ import React from 'react';
 
 const ComoTrabajamos = () => {
   return (
-    <section className="w-full py-16 md:py-24 bg-white font-raleway relative z-10 border-t border-black/5">
+    <section className="w-full py-16 md:py-24 bg-white font-raleway relative z-10">
       <div className="max-w-[1050px] mx-auto px-6 text-center">
         
         {/* Subtítulo superior */}

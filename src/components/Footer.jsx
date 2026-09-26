@@ -3,11 +3,24 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#F1F2F3] text-os-ink-soft font-raleway pt-[72px] border-t border-black/5">
-      <div className="max-w-[1180px] mx-auto px-8">
+    <footer className="bg-[#2E4B34] text-[#F1F2F3] font-raleway pt-20 relative overflow-hidden">
+      
+      {/* =========================================
+          EFECTO DE FONDO "ORBITAL"
+          ========================================= */}
+      {/* Órbitas Izquierdas */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full border border-[#6B7C5A]/30 pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full border border-[#6B7C5A]/20 pointer-events-none"></div>
+      
+      {/* Órbitas Derechas */}
+      <div className="absolute bottom-[-30%] right-[-10%] w-[700px] h-[700px] rounded-full border border-[#A3B18A]/10 pointer-events-none"></div>
+      <div className="absolute bottom-[-15%] right-[-5%] w-[500px] h-[500px] rounded-full border border-[#256B3C]/40 pointer-events-none"></div>
+      <div className="absolute bottom-[0%] right-[0%] w-[300px] h-[300px] rounded-full border border-[#A3B18A]/20 pointer-events-none"></div>
+
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 relative z-10">
         
         {/* === GRID PRINCIPAL (3 Columnas) === */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr] gap-12 pb-12 border-b border-black/10">
+        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-12 lg:gap-16 pb-14 border-b border-[#6B7C5A]/40">
           
           {/* Columna 1: Logo y Descripción */}
           <div className="flex flex-col items-start">
@@ -15,57 +28,85 @@ const Footer = () => {
               <img 
                 src="/logo.png" 
                 alt="Orbital Salud" 
-                className="h-[44px] w-auto object-contain mb-[16px]" 
+                /* brightness-0 invert convierte el logo a blanco puro para que resalte en el fondo oscuro */
+                className="h-[48px] w-auto object-contain mb-6 brightness-0 invert opacity-90 transition-opacity hover:opacity-100" 
               />
             </Link>
-            <p className="text-[14px] leading-relaxed max-w-[280px] font-raleway">
-              Centro de metabolismo y obesidad.<br />
-              Bajamos de peso tratando la causa metabólica y hormonal, no solo la balanza — para adultos y niños. Av. Brasil 2730, consultorio 1106, Edificio Qualis, Pueblo Libre, Lima.
+            <p className="text-[#A3B18A] text-[14.5px] leading-relaxed max-w-[320px] font-raleway font-medium">
+              Centro de metabolismo y obesidad.<br className="hidden md:block" />
+              Bajamos de peso tratando la causa metabólica y hormonal, no solo la balanza — para adultos y niños. 
             </p>
           </div>
 
           {/* Columna 2: Enlaces */}
           <div>
-            <h5 className="text-os-ink font-raleway text-[15px] font-bold mb-[18px]">
+            <h5 className="text-white font-raleway text-[16px] font-bold mb-6 tracking-widest uppercase">
               Enlaces
             </h5>
-            <ul className="flex flex-col gap-[11px] text-[14px] font-raleway">
-              <li><Link to="/especialidades" className="hover:text-os-accent transition-colors">Especialidades</Link></li>
-              <li><Link to="/equipo" className="hover:text-os-accent transition-colors">Equipo</Link></li>
-              <li><Link to="/productos" className="hover:text-os-accent transition-colors">Tienda</Link></li>
-              <li><Link to="/contacto" className="hover:text-os-accent transition-colors">Preguntas frecuentes</Link></li>
+            <ul className="flex flex-col gap-4 text-[14.5px] font-raleway font-medium">
+              <li>
+                <Link to="/especialidades" className="text-[#F1F2F3] hover:text-[#A3B18A] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                  Especialidades
+                </Link>
+              </li>
+              <li>
+                <Link to="/equipo" className="text-[#F1F2F3] hover:text-[#A3B18A] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                  Equipo
+                </Link>
+              </li>
+              <li>
+                <Link to="/productos" className="text-[#F1F2F3] hover:text-[#A3B18A] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                  Tienda
+                </Link>
+              </li>
+              <li>
+                <Link to="/contacto" className="text-[#F1F2F3] hover:text-[#A3B18A] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                  Preguntas frecuentes
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Columna 3: Contacto */}
           <div>
-            <h5 className="text-os-ink font-raleway text-[15px] font-bold mb-[18px]">
+            <h5 className="text-white font-raleway text-[16px] font-bold mb-6 tracking-widest uppercase">
               Contacto
             </h5>
-            <ul className="flex flex-col gap-[11px] text-[14px] font-raleway">
-              <li>WhatsApp: 981 009 863</li>
-              <li>Av. Brasil 2730, of. 1106 — Edif. Qualis</li>
-              <li>Pueblo Libre, Lima</li>
-              <li>Horario: Lun-Sáb 9am-6pm</li>
-              <li>Instagram / TikTok: por confirmar</li>
+            <ul className="flex flex-col gap-4 text-[14.5px] font-raleway text-[#F1F2F3]">
+              
+              <li className="flex items-start gap-3 group">
+                <svg className="w-5 h-5 text-[#A3B18A] shrink-0 mt-0.5 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                <span className="font-medium">WhatsApp: 981 009 863</span>
+              </li>
+              
+              <li className="flex items-start gap-3 group">
+                <svg className="w-5 h-5 text-[#A3B18A] shrink-0 mt-0.5 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <span className="font-medium leading-snug">Av. Brasil 2730, of. 1106<br/>Edif. Qualis, Pueblo Libre, Lima</span>
+              </li>
+              
+              <li className="flex items-start gap-3 group">
+                <svg className="w-5 h-5 text-[#A3B18A] shrink-0 mt-0.5 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span className="font-medium">Lun-Sáb 9:00 am - 6:00 pm</span>
+              </li>
+            
             </ul>
           </div>
 
         </div>
 
         {/* === COPYRIGHT Y REDES (Bottom) === */}
-        <div className="flex flex-col md:flex-row justify-between items-center py-[26px] text-[12.5px] font-raleway">
-          <p>
+        <div className="flex flex-col md:flex-row justify-between items-center py-8 text-[13px] font-raleway">
+          <p className="text-[#A3B18A] font-medium mb-4 md:mb-0 text-center md:text-left">
             © {new Date().getFullYear()} Orbital Salud. Todos los derechos reservados.
           </p>
           
-          {/* Enlaces de Redes en línea texto */}
-          <div className="flex gap-2 mt-4 md:mt-0 items-center font-bold">
-            <a href="#" className="hover:text-os-accent transition-colors font-raleway">Instagram</a>
-            <span className="text-os-ink-soft/50">·</span>
-            <a href="#" className="hover:text-os-accent transition-colors font-raleway">TikTok</a>
-            <span className="text-os-ink-soft/50">·</span>
-            <a href="#" className="hover:text-os-accent transition-colors font-raleway">WhatsApp</a>
+          {/* Enlaces de Redes en línea */}
+          <div className="flex gap-4 items-center font-bold text-[#F1F2F3]">
+            <a href="#" className="hover:text-[#A3B18A] transition-colors">Instagram</a>
+            <span className="text-[#6B7C5A]">•</span>
+            <a href="#" className="hover:text-[#A3B18A] transition-colors">TikTok</a>
+            <span className="text-[#6B7C5A]">•</span>
+            <a href="#" className="hover:text-[#A3B18A] transition-colors">WhatsApp</a>
           </div>
         </div>
 

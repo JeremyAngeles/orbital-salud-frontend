@@ -97,20 +97,42 @@ const NoticiasPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white font-raleway">
-      <main className="flex-grow pt-10 md:pt-16 pb-20">
-        <div className="max-w-[1250px] mx-auto px-4 sm:px-6 lg:px-8">
+      
+      {/* =========================================
+          CABECERA HERO (Con fondo F9F6F0 y Onda)
+          ========================================= */}
+      <section className="w-full pt-20 md:pt-28 bg-[#F9F6F0] relative overflow-hidden z-10">
+        
+        <div className="max-w-[1050px] mx-auto px-6 text-center pb-8 md:pb-12 relative z-20">
+          <span className="text-[#A68A61] font-bold text-[11px] md:text-[13px] tracking-[0.25em] uppercase mb-4 block font-raleway">
+            Blog Médico
+          </span>
           
-          {/* Cabecera Principal */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-black/5 pb-8">
-            <div>
-              <span className="text-[#a3b18a] font-bold text-[11px] md:text-[12px] tracking-[0.2em] uppercase block mb-3 font-raleway">
-                Blog Médico
-              </span>
-              <h1 className="text-[32px] md:text-[46px] font-bold text-[#1e3325] leading-tight max-w-3xl font-raleway">
-                Salud explicada de forma simple, directa y científica.
-              </h1>
-            </div>
-          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2E4B34] mb-6 leading-tight font-raleway">
+            Noticias Semanales
+          </h1>
+          
+          <p className="text-[#6b7280] text-[15px] md:text-[17px] leading-relaxed max-w-2xl mx-auto font-raleway">
+            Salud explicada de forma simple, directa y científica. Lee nuestros últimos artículos y mantente informado sobre metabolismo, nutrición y bienestar integral.
+          </p>
+        </div>
+
+        {/* ONDA INFERIOR BLANCA (Para conectar con el contenido) */}
+        <div className="w-full overflow-hidden leading-none z-0 relative">
+          <svg viewBox="0 0 1440 120" className="block w-full h-[50px] md:h-[90px]" preserveAspectRatio="none">
+            <path 
+              d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,42.7C1120,32,1280,32,1360,32L1440,32L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" 
+              className="fill-white"
+            ></path>
+          </svg>
+        </div>
+      </section>
+
+      {/* =========================================
+          CONTENIDO PRINCIPAL
+          ========================================= */}
+      <main className="flex-grow pt-10 pb-20 bg-white">
+        <div className="max-w-[1250px] mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ARTÍCULO DESTACADO (Siempre visible, sin condicional) */}
           <div className="mb-12 md:mb-16 group cursor-pointer animate-fadeIn">
@@ -181,7 +203,6 @@ const NoticiasPage = () => {
                 <h3 className="text-[22px] md:text-[28px] font-bold text-[#1e3325] font-raleway">
                   {filtroActivo === 'Todos los temas' ? 'Lo más leído este mes' : `Artículos de ${filtroActivo}`}
                 </h3>
-                {/* Enlace "Ver todo" eliminado */}
               </div>
 
               {articulosFiltrados.length === 0 ? (

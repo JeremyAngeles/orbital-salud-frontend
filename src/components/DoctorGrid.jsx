@@ -11,12 +11,12 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
     }
     return () => {
       document.body.style.overflow = 'unset';
-    };
+    }
   }, [doctorSeleccionado]);
 
   const defaultEquipo = [
     { 
-      id: 1, nombre: "Dra. Angélica Caycho", especialidad: "Endocrinología", imagen: "/doctor_caycho.jpg",
+      id: 1, nombre: "Dra. Angélica Caycho", especialidad: "Endocrinología", imagen: "/angelica-caycho.jpg",
       detalle: {
         tituloCompleto: "Médica Endocrinóloga · Especialista en Obesidad, Diabetes y Salud Metabólica",
         formacion: [
@@ -30,7 +30,7 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
       }
     },
     { 
-      id: 2, nombre: "Dra. Antonella Zúñiga", especialidad: "Endocrinología", imagen: "/doctor_zuniga.jpg",
+      id: 2, nombre: "Dra. Antonella Zúñiga", especialidad: "Endocrinología", imagen: "/antonella-zuniga.jpg",
       detalle: {
         tituloCompleto: "Médica Endocrinóloga · Especialista en control hormonal",
         formacion: [{ institucion: "Universidad Ejemplo", grado: "Médica Cirujana", periodo: "2012 - 2018" }],
@@ -38,7 +38,7 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
       }
     },
     { 
-      id: 3, nombre: "Dra. Norah Alcázar", especialidad: "Endocrinología Pediátrica", imagen: "/doctor_alcazar.jpg",
+      id: 3, nombre: "Dra. Norah Alcázar", especialidad: "Endocrinología Pediátrica", imagen: "/norah-alcazar.jpg",
       detalle: {
         tituloCompleto: "Médica Endocrinóloga Pediatra · Crecimiento y desarrollo infantil",
         formacion: [{ institucion: "Universidad Ejemplo", grado: "Especialidad Pediátrica", periodo: "2015 - 2019" }],
@@ -46,7 +46,7 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
       }
     },
     { 
-      id: 4, nombre: "Dra. Karen Ángeles", especialidad: "Dermatología", imagen: "/doctor_angeles.jpg",
+      id: 4, nombre: "Dra. Karen Ángeles", especialidad: "Dermatología", imagen: "/karen-angeles.jpg",
       detalle: {
         tituloCompleto: "Médica Dermatóloga · Especialista en cuidado integral de la piel",
         formacion: [
@@ -57,7 +57,7 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
       }
     },
     { 
-      id: 5, nombre: "Dr. Luis Nizama", especialidad: "Cardiología", imagen: "/doctor_nizama.jpg",
+      id: 5, nombre: "Dr. Luis Nizama", especialidad: "Cardiología", imagen: "/luis-nizama.jpg",
       detalle: {
         tituloCompleto: "Médico Cardiólogo · Prevención cardiovascular y riesgo metabólico",
         formacion: [{ institucion: "Universidad Ejemplo", grado: "Especialidad en Cardiología", periodo: "2014 - 2018" }],
@@ -65,7 +65,7 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
       }
     },
     { 
-      id: 6, nombre: "Lic. Carolina Moreno", especialidad: "Nutrición", imagen: "/doctor_moreno.jpg",
+      id: 6, nombre: "Lic. Carolina Moreno", especialidad: "Nutrición", imagen: "/carolina-moreno.jpg",
       detalle: {
         tituloCompleto: "Licenciada en Nutrición · Enfoque integral y planes personalizados",
         formacion: [{ institucion: "Universidad Ejemplo", grado: "Licenciatura en Nutrición", periodo: "2016 - 2021" }],
@@ -78,10 +78,46 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
 
   return (
     <>
-      <section className="relative bg-white pt-16 pb-20 md:pb-24 font-raleway">
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="relative bg-[#efe8d8] pt-24 pb-24 md:pt-32 md:pb-32 font-raleway z-10 overflow-hidden">
+        
+        {/* =========================================
+            ONDA SUPERIOR (Onda Oficial Gruesa)
+            ========================================= */}
+        <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-10">
+          <svg 
+            viewBox="0 0 800 200" 
+            preserveAspectRatio="none" 
+            className="w-full h-[100px] md:h-[180px] block"
+          >
+            {/* 1. Relleno blanco superior que recorta el fondo y forma los montesitos */}
+            <path 
+              d="M0,100 C150,140 300,60 500,130 C650,170 750,100 800,118 L800,0 L0,0 Z" 
+              fill="#ffffff"
+            />
+
+            {/* 2. Línea Verde Oscura */}
+            <path 
+              d="M-10,95 C140,145 310,55 510,125 C660,175 740,95 810,113" 
+              fill="none" 
+              stroke="#5c6e4e" 
+              strokeWidth="10" 
+              opacity="0.9"
+            />
+            
+            {/* 3. Línea Verde Clara */}
+            <path 
+              d="M-10,120 C160,80 280,110 490,140 C630,155 770,80 810,90" 
+              fill="none" 
+              stroke="#8b9a7b" 
+              strokeWidth="5" 
+              opacity="0.9"
+            />
+          </svg>
+        </div>
+
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
           
-          <div className="text-center mb-10 md:mb-14">
+          <div className="text-center mb-10 md:mb-14 pt-8">
             <span className="text-[#8a9096] font-bold text-[10px] md:text-[11px] tracking-[0.2em] uppercase font-raleway block mb-3 md:mb-4">
               Nuestro equipo
             </span>
@@ -135,12 +171,48 @@ const DoctorGrid = ({ equipoData, loading, error }) => {
               Haz click en la foto de cada especialista para ver su formación profesional.
             </p>
             
-            <button className="border border-[#1e3325] text-[#1e3325] font-raleway font-bold text-[13px] md:text-[14px] px-8 py-3 rounded-full hover:bg-[#1e3325] hover:text-white transition-colors duration-300">
+            <button className="border border-[#1e3325] text-[#1e3325] bg-transparent font-raleway font-bold text-[13px] md:text-[14px] px-8 py-3 rounded-full hover:bg-[#1e3325] hover:text-white transition-colors duration-300">
               Conoce al equipo completo
             </button>
           </div>
 
         </div>
+
+        {/* =========================================
+            ONDA INFERIOR (Onda Oficial Gruesa - Volteada)
+            ========================================= */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+          <svg 
+            viewBox="0 0 800 200" 
+            preserveAspectRatio="none" 
+            className="w-full h-[100px] md:h-[180px] block -scale-y-100"
+          >
+            {/* 1. Relleno blanco superior que recorta el fondo y forma los montesitos */}
+            <path 
+              d="M0,100 C150,140 300,60 500,130 C650,170 750,100 800,118 L800,0 L0,0 Z" 
+              fill="#ffffff"
+            />
+
+            {/* 2. Línea Verde Oscura */}
+            <path 
+              d="M-10,95 C140,145 310,55 510,125 C660,175 740,95 810,113" 
+              fill="none" 
+              stroke="#5c6e4e" 
+              strokeWidth="10" 
+              opacity="0.9"
+            />
+            
+            {/* 3. Línea Verde Clara */}
+            <path 
+              d="M-10,120 C160,80 280,110 490,140 C630,155 770,80 810,90" 
+              fill="none" 
+              stroke="#8b9a7b" 
+              strokeWidth="5" 
+              opacity="0.9"
+            />
+          </svg>
+        </div>
+
       </section>
 
       {/* MODAL (Pop-up) */}
