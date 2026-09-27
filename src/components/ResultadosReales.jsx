@@ -5,26 +5,10 @@ const ResultadosReales = () => {
   const [activeCase, setActiveCase] = useState(0);
   const [direction, setDirection] = useState('next');
 
+  // Se invirtió el orden: Hombre primero, Mujer después
   const cases = [
     {
       tag: "CASO 1 - PROGRAMA METABÓLICO DE PESO",
-      name: "Paciente E.H.",
-      details: "47 años · 1.70 m · Endocrinología + Nutrición",
-      stats: [
-        { label: "Peso", value: "98 kg → 79 kg", highlight: "(-19 kg · -19%)" },
-        { label: "IMC", value: "33.9 → 27.3" },
-        { label: "Grasa corporal (InBody)", value: "34% → 24%" },
-        { label: "Masa muscular", value: "Mantenida" },
-        { label: "Duración", value: "24 semanas" }
-      ],
-      causa: "Resistencia a la insulina + prediabetes",
-      tratamiento: "plan nutricional personalizado + tratamiento médico supervisado (análogo de GLP-1 cuando estuvo indicado) + seguimiento con InBody.",
-      quote: `"Había intentado mil dietas. Recién cuando encontraron por qué mi cuerpo no bajaba, todo cambió."`,
-      imgAntes: "/antes-mujer.png",
-      imgDespues: "/despues-mujer.png"
-    },
-    {
-      tag: "CASO 2 - PROGRAMA METABÓLICO DE PESO",
       name: "Paciente M.R.",
       details: "39 años · 1.58 m · Endocrinología + Nutrición",
       stats: [
@@ -39,6 +23,23 @@ const ResultadosReales = () => {
       quote: `"Me trataron la tiroides y la insulina, no solo el peso. Por eso esta vez sí se mantuvo."`,
       imgAntes: "/antes-hombre.png",
       imgDespues: "/despues-hombre.png"
+    },
+    {
+      tag: "CASO 2 - PROGRAMA METABÓLICO DE PESO",
+      name: "Paciente E.H.",
+      details: "47 años · 1.70 m · Endocrinología + Nutrición",
+      stats: [
+        { label: "Peso", value: "98 kg → 79 kg", highlight: "(-19 kg · -19%)" },
+        { label: "IMC", value: "33.9 → 27.3" },
+        { label: "Grasa corporal (InBody)", value: "34% → 24%" },
+        { label: "Masa muscular", value: "Mantenida" },
+        { label: "Duración", value: "24 semanas" }
+      ],
+      causa: "Resistencia a la insulina + prediabetes",
+      tratamiento: "plan nutricional personalizado + tratamiento médico supervisado (análogo de GLP-1 cuando estuvo indicado) + seguimiento con InBody.",
+      quote: `"Había intentado mil dietas. Recién cuando encontraron por qué mi cuerpo no bajaba, todo cambió."`,
+      imgAntes: "/antes-mujer.png",
+      imgDespues: "/despues-mujer.png"
     }
   ];
 
@@ -117,8 +118,8 @@ const ResultadosReales = () => {
               className={`flex flex-col lg:flex-row w-full ${direction === 'next' ? 'animate-slide-next' : 'animate-slide-prev'}`}
             >
               
-              {/* Columna Izquierda: Textos */}
-              <div className="p-8 lg:p-12 lg:w-[50%] flex flex-col justify-center text-white bg-gradient-to-br from-[#112318] to-[#1a3524]">
+              {/* Columna Izquierda: Textos (En móvil va abajo: order-2, en PC va a la izquierda: order-1) */}
+              <div className="order-2 lg:order-1 p-8 lg:p-12 lg:w-[50%] flex flex-col justify-center text-white bg-gradient-to-br from-[#112318] to-[#1a3524]">
                 <span className="font-raleway text-[#4ADE80] text-[10px] font-bold tracking-widest uppercase mb-3 block opacity-90">
                   {currentCase.tag}
                 </span>
@@ -158,43 +159,48 @@ const ResultadosReales = () => {
                 </blockquote>
               </div>
 
-              {/* Columna Derecha: Imagen Slider */}
-              <div className="lg:w-[50%] relative bg-[#EAE6DF] min-h-[400px] lg:min-h-full select-none flex items-center justify-center overflow-hidden">
+              {/* Columna Derecha: Imagen Slider (En móvil va arriba: order-1, en PC va a la derecha: order-2) */}
+              <div className="order-1 lg:order-2 lg:w-[50%] relative bg-[#EAE6DF] h-[350px] sm:h-[450px] lg:h-auto select-none flex items-center justify-center overflow-hidden">
+                
+                {/* pointer-events-none en las imágenes evita bugs al arrastrar en celulares y PC */}
                 <img 
                   src={currentCase.imgDespues} 
                   alt="Paciente Después" 
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
                   onError={(e) => { e.target.src = 'https://via.placeholder.com/800x1000/112318/FFFFFF?text=FOTO+DESPUES' }}
                 />
                 <img 
                   src={currentCase.imgAntes} 
                   alt="Paciente Antes" 
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
                   style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
                   onError={(e) => { e.target.src = 'https://via.placeholder.com/800x1000/F9F6F0/112318?text=FOTO+ANTES' }}
                 />
                 
-                <div className="font-raleway absolute top-6 left-6 bg-[#112318]/70 backdrop-blur-md text-white text-[10px] md:text-[11px] font-bold px-4 py-2 rounded-full z-10 uppercase tracking-widest">
+                {/* Etiquetas Antes / Después */}
+                <div className="font-raleway absolute top-6 left-6 bg-[#112318]/70 backdrop-blur-md text-white text-[10px] md:text-[11px] font-bold px-4 py-2 rounded-full z-10 uppercase tracking-widest pointer-events-none">
                   ANTES
                 </div>
-                <div className="font-raleway absolute top-6 right-6 bg-[#256b3c]/80 backdrop-blur-md text-white text-[10px] md:text-[11px] font-bold px-4 py-2 rounded-full z-10 uppercase tracking-widest shadow-lg shadow-[#256b3c]/30">
+                <div className="font-raleway absolute top-6 right-6 bg-[#256b3c]/80 backdrop-blur-md text-white text-[10px] md:text-[11px] font-bold px-4 py-2 rounded-full z-10 uppercase tracking-widest shadow-lg shadow-[#256b3c]/30 pointer-events-none">
                   DESPUÉS
                 </div>
 
-                <div className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all" style={{ left: `calc(${sliderPos}% - 2px)` }}>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shadow-2xl pointer-events-none border border-gray-100">
+                {/* Línea divisoria (Se le quitó el transition-all para que no tenga lag) */}
+                <div className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_15px_rgba(0,0,0,0.5)] pointer-events-none" style={{ left: `calc(${sliderPos}% - 2px)` }}>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shadow-2xl border border-gray-100">
                     <svg className="w-5 h-5 md:w-6 md:h-6 text-[#112318]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 9l-4 4 4 4m8-8l4 4-4 4"></path>
                     </svg>
                   </div>
                 </div>
 
+                {/* Input rango invisible que controla todo (optimizado para touch) */}
                 <input 
                   type="range" 
                   min="0" max="100" 
                   value={sliderPos} 
                   onChange={(e) => setSliderPos(e.target.value)} 
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30" 
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 m-0 p-0" 
                 />
               </div>
 

@@ -23,7 +23,7 @@ const Home = () => {
   const [errorPlanes, setErrorPlanes] = useState('');
 
   const aliados = [
-    "adium.png", "expert (1).png", "imaginesmedicas.png", "integral.png",
+    "adium.png", "expert (1).png", "imaginesmedicas.png", "integral.png","antaria.png" , "apre.png" ,
     "intermedica.png", "novo.png", "saludTools.png", "sermed.png", "vanttive.png"
   ];
 

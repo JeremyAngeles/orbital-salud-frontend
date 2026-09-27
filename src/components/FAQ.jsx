@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState(0); // El primero empieza abierto por defecto
+  // Cambiamos el 0 por null para que empiece todo cerrado por defecto
+  const [openIndex, setOpenIndex] = useState(null); 
 
   const faqs = [
     {
