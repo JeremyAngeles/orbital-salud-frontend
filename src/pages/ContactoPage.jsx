@@ -35,53 +35,53 @@ const ContactoPage = () => {
         <div className="max-w-[1250px] mx-auto px-6 lg:px-8">
 
           {/* GRID DE 4 TARJETAS CON EFECTO HOVER VERDE OSCURO (#2E4B34) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {/* GRID DE 4 TARJETAS CON EFECTO HOVER VERDE OSCURO (#2E4B34) */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
             
             {/* Tarjeta 1: Dirección */}
-            <div className="group bg-[#F9F6F0] rounded-[32px] p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <div className="group bg-[#F9F6F0] rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               </div>
-              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[15px] tracking-widest uppercase mb-3 font-raleway transition-colors duration-300">Dirección</h3>
-              <p className="text-[#6b7280] group-hover:text-white/90 text-[14px] leading-relaxed font-raleway transition-colors duration-300">
-                Av. Brasil 2730, Of. 1106<br />
-                Pueblo Libre, Lima
+              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[12px] sm:text-[15px] tracking-widest uppercase mb-2 sm:mb-3 font-raleway transition-colors duration-300">Dirección</h3>
+              <p className="text-[#6b7280] group-hover:text-white/90 text-[11px] sm:text-[14px] leading-relaxed font-raleway transition-colors duration-300">
+                Av. Brasil 2730<br />
+                Pueblo Libre
               </p>
             </div>
 
             {/* Tarjeta 2: Teléfono */}
-            <div className="group bg-[#F9F6F0] rounded-[32px] p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <div className="group bg-[#F9F6F0] rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
               </div>
-              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[15px] tracking-widest uppercase mb-3 font-raleway transition-colors duration-300">Teléfono</h3>
-              <p className="text-[#6b7280] group-hover:text-white/90 text-[14px] leading-relaxed font-raleway transition-colors duration-300">
+              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[12px] sm:text-[15px] tracking-widest uppercase mb-2 sm:mb-3 font-raleway transition-colors duration-300">Teléfono</h3>
+              <p className="text-[#6b7280] group-hover:text-white/90 text-[11px] sm:text-[14px] leading-relaxed font-raleway transition-colors duration-300">
                 +51 981 009 863<br />
-                Atención vía WhatsApp
+                Vía WhatsApp
               </p>
             </div>
 
             {/* Tarjeta 3: Correo */}
-            <div className="group bg-[#F9F6F0] rounded-[32px] p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <div className="group bg-[#F9F6F0] rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               </div>
-              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[15px] tracking-widest uppercase mb-3 font-raleway transition-colors duration-300">Correo</h3>
-              <p className="text-[#6b7280] group-hover:text-white/90 text-[14px] leading-relaxed font-raleway transition-colors duration-300">
-                citas@orbitalsalud.pe<br />
-                info@orbitalsalud.pe
+              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[12px] sm:text-[15px] tracking-widest uppercase mb-2 sm:mb-3 font-raleway transition-colors duration-300">Correo</h3>
+              <p className="text-[#6b7280] group-hover:text-white/90 text-[11px] sm:text-[14px] leading-relaxed font-raleway transition-colors duration-300 break-all">
+                citas@orbitalsalud.pe
               </p>
             </div>
 
             {/* Tarjeta 4: Horario */}
-            <div className="group bg-[#F9F6F0] rounded-[32px] p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div className="group bg-[#F9F6F0] rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 md:p-10 flex flex-col items-center text-center border border-black/5 hover:bg-[#2E4B34] hover:shadow-xl transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white flex items-center justify-center mb-4 sm:mb-5 shadow-sm text-[#2E4B34] group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </div>
-              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[15px] tracking-widest uppercase mb-3 font-raleway transition-colors duration-300">Horario</h3>
-              <p className="text-[#6b7280] group-hover:text-white/90 text-[14px] leading-relaxed font-raleway transition-colors duration-300">
-                Lunes a Viernes: 9am - 6pm<br />
-                Sábados: 9am - 1pm
+              <h3 className="text-[#1e3325] group-hover:text-white font-bold text-[12px] sm:text-[15px] tracking-widest uppercase mb-2 sm:mb-3 font-raleway transition-colors duration-300">Horario</h3>
+              <p className="text-[#6b7280] group-hover:text-white/90 text-[11px] sm:text-[14px] leading-relaxed font-raleway transition-colors duration-300">
+                Lun - Vie: 9am-8pm<br />
+                Sáb: 9am-8pm
               </p>
             </div>
           </div>

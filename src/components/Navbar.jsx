@@ -61,13 +61,12 @@ const Navbar = () => {
             <Link to="/" onClick={() => window.scrollTo(0,0)} className={getLinkClass('/', '')}>
               Inicio
             </Link>
-            <Link to="/especialidades" className={getLinkClass('/especialidades', '')}>
-              Especialidades
+            <Link to="/nosotros" className={getLinkClass('/nosotros', '')}>
+              Nosotros
             </Link>
             <Link to="/equipo" className={getLinkClass('/equipo', '')}>
               Equipo
             </Link>
-            {/* NUEVA PÁGINA: Noticias */}
             <Link to="/noticias" className={getLinkClass('/noticias', '')}>
               Noticias
             </Link>
@@ -124,12 +123,12 @@ const Navbar = () => {
         {isOpen && (
           <div className="lg:hidden flex flex-col gap-4 pt-4 pb-4 border-t border-black/5 mt-3 animate-fadeIn">
             <Link to="/" onClick={() => { closeMenu(); window.scrollTo(0,0); }} className={getMobileLinkClass('/', '')}>Inicio</Link>
-            <Link to="/especialidades" onClick={closeMenu} className={getMobileLinkClass('/especialidades', '')}>Especialidades</Link>
+            
+            {/* CORRECCIÓN: Actualizado a /nosotros en la versión móvil */}
+            <Link to="/nosotros" onClick={closeMenu} className={getMobileLinkClass('/nosotros', '')}>Nosotros</Link>
+            
             <Link to="/equipo" onClick={closeMenu} className={getMobileLinkClass('/equipo', '')}>Equipo</Link>
-            
-            {/* NUEVA PÁGINA: Noticias (Móvil) */}
             <Link to="/noticias" onClick={closeMenu} className={getMobileLinkClass('/noticias', '')}>Noticias</Link>
-            
             <Link to="/productos" onClick={closeMenu} className={getMobileLinkClass('/productos', '')}>Tienda</Link>
             <Link to="/contacto" onClick={closeMenu} className={getMobileLinkClass('/contacto', '')}>Contacto</Link>
             

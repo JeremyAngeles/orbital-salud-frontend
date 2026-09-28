@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar'; 
 import Home from './pages/Home'; 
-import EspecialidadesPage from './pages/EspecialidadesPage'; 
+import NosotrosPage from './pages/NosotrosPage'; 
 import EquipoPage from './pages/EquipoPage';
 import NoticiasPage from './pages/NoticiasPage'; // <--- IMPORTAMOS LA NUEVA PÁGINA
 import ContactoPage from './pages/ContactoPage';
@@ -43,7 +43,7 @@ function AppContent() {
           {/* --- Rutas Públicas de la Clínica --- */}
           <Route path="/" element={<Home />} />
           <Route path="/inbody" element={<InBodyPage />} /> 
-          <Route path="/especialidades" element={<EspecialidadesPage />} />
+          <Route path="/nosotros" element={<NosotrosPage />} />
           <Route path="/equipo" element={<EquipoPage />} />
           <Route path="/noticias" element={<NoticiasPage />} /> {/* <--- NUEVA RUTA AGREGADA */}
           <Route path="/contacto" element={<ContactoPage />} /> 

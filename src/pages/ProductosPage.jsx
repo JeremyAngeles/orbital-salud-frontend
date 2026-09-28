@@ -16,8 +16,8 @@ const ProductosPage = () => {
   const [categoriasActivas, setCategoriasActivas] = useState([]);
   const [especialidadesActivas, setEspecialidadesActivas] = useState([]);
   
-  // Estado para Pestañas de Filtros en Celular
-  const [mobileTabActiva, setMobileTabActiva] = useState(null);
+  // Estado para Pestañas de Filtros en Celular (Bottom Sheet)
+  const [bottomSheetActivo, setBottomSheetActivo] = useState(null);
   
   // Estados para el Rango de Precio
   const [maxPrecioReal, setMaxPrecioReal] = useState(1000);
@@ -125,7 +125,7 @@ const ProductosPage = () => {
     setEspecialidadesActivas([]);
     setPrecioFiltro(maxPrecioReal);
     setSearchTerm("");
-    setMobileTabActiva(null);
+    setBottomSheetActivo(null);
   };
 
   let productosProcesados = productos.filter(p => {
@@ -150,7 +150,8 @@ const ProductosPage = () => {
   const filtrosActivosCount = categoriasActivas.length + especialidadesActivas.length + (precioFiltro < maxPrecioReal ? 1 : 0);
 
   return (
-    <div className="min-h-screen bg-white font-raleway flex flex-col relative z-10">
+    // Agregamos pb-16 en móvil para que el contenido no quede debajo del bottom bar
+    <div className="min-h-screen bg-white font-raleway flex flex-col relative z-10 pb-[70px] lg:pb-0">
       
       {/* =========================================
           CABECERA HERO (Con fondo F9F6F0 y Onda)
@@ -170,12 +171,11 @@ const ProductosPage = () => {
             Fórmulas magistrales bajo indicación médica, formuladas en exclusiva para Orbital Salud. Arma tu pedido, revisa el total y coordina el pago — sin medicamentos.
           </p>
           
-          <div className="inline-flex items-center justify-center gap-2 bg-white border border-black/5 px-6 py-2.5 mt-8 rounded-full text-[12px] md:text-[13px] font-bold text-[#1e3325] shadow-sm font-raleway">
-            <span>🚚 Entrega a domicilio en Lima · Pago via Yape o transferencia</span>
+          <div className="inline-flex items-center justify-center gap-2 bg-white border border-black/5 px-6 py-2.5 mt-8 rounded-full text-[12px] md:text-[13px] font-bold text-[#1e3325] shadow-sm font-raleway text-center leading-snug">
+            <span>🚚 Entrega a domicilio en Lima y envíos a provincia por Shalom · Pago vía Yape o transferencia</span>
           </div>
         </div>
 
-        {/* === ONDA INFERIOR CORREGIDA === */}
         <div className="w-full overflow-hidden leading-none z-0 relative">
           <svg viewBox="0 0 1440 120" className="block w-full h-[50px] md:h-[90px]" preserveAspectRatio="none">
             <path 
@@ -204,70 +204,6 @@ const ProductosPage = () => {
               />
               <svg className="w-5 h-5 absolute left-5 top-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
-          </div>
-
-          {/* PESTAÑAS DE FILTROS PARA CELULAR (SOLO VISIBLE EN MÓVIL) */}
-          <div className="lg:hidden w-full mb-8">
-            <div className="flex bg-[#F9F6F0] rounded-xl shadow-sm border border-black/5 overflow-hidden mb-3">
-              <button 
-                onClick={() => setMobileTabActiva(mobileTabActiva === 'precio' ? null : 'precio')}
-                className={`flex-1 py-3 text-[12px] font-bold border-r border-black/5 transition-colors font-raleway ${mobileTabActiva === 'precio' ? 'bg-[#256b3c] text-white' : 'text-[#6b7280] hover:bg-white'}`}
-              >
-                Precio
-              </button>
-              <button 
-                onClick={() => setMobileTabActiva(mobileTabActiva === 'especialidad' ? null : 'especialidad')}
-                className={`flex-1 py-3 text-[12px] font-bold border-r border-black/5 transition-colors font-raleway ${mobileTabActiva === 'especialidad' ? 'bg-[#256b3c] text-white' : 'text-[#6b7280] hover:bg-white'}`}
-              >
-                Especialidad
-              </button>
-              <button 
-                onClick={() => setMobileTabActiva(mobileTabActiva === 'categoria' ? null : 'categoria')}
-                className={`flex-1 py-3 text-[12px] font-bold transition-colors font-raleway ${mobileTabActiva === 'categoria' ? 'bg-[#256b3c] text-white' : 'text-[#6b7280] hover:bg-white'}`}
-              >
-                Categoría
-              </button>
-            </div>
-
-            {/* CONTENIDO DE LAS PESTAÑAS (MÓVIL) */}
-            {mobileTabActiva && (
-              <div className="bg-[#F9F6F0] p-5 rounded-xl shadow-sm border border-black/5 animate-fadeIn">
-                
-                {mobileTabActiva === 'precio' && (
-                  <div>
-                    <h4 className="text-[13px] font-bold text-[#1e3325] mb-4 font-raleway">Rango de Precio</h4>
-                    <input type="range" min="0" max={maxPrecioReal} value={precioFiltro} onChange={(e) => setPrecioFiltro(Number(e.target.value))} className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-[#256b3c]"/>
-                    <div className="flex justify-between text-xs font-bold text-[#6b7280] mt-3 font-raleway">
-                      <span>S/ 0</span>
-                      <span>Hasta S/ {precioFiltro.toFixed(0)}</span>
-                    </div>
-                  </div>
-                )}
-
-                {mobileTabActiva === 'especialidad' && (
-                  <ul className="space-y-3">
-                    {especialidadesUnicas.map((esp, idx) => (
-                      <li key={`mob-esp-${idx}`} className="flex items-center justify-between cursor-pointer font-raleway" onClick={() => toggleFiltro(esp, 'especialidad')}>
-                        <span className={`text-[13px] ${especialidadesActivas.includes(esp) ? 'text-[#256b3c] font-bold' : 'text-[#6b7280]'}`}>{esp}</span>
-                        <input type="checkbox" checked={especialidadesActivas.includes(esp)} readOnly className="w-4 h-4 rounded border-gray-300 accent-[#256b3c]" />
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {mobileTabActiva === 'categoria' && (
-                  <ul className="space-y-3">
-                    {categoriasUnicas.map((cat, idx) => (
-                      <li key={`mob-cat-${idx}`} className="flex items-center justify-between cursor-pointer font-raleway" onClick={() => toggleFiltro(cat, 'categoria')}>
-                        <span className={`text-[13px] ${categoriasActivas.includes(cat) ? 'text-[#256b3c] font-bold' : 'text-[#6b7280]'}`}>{cat}</span>
-                        <input type="checkbox" checked={categoriasActivas.includes(cat)} readOnly className="w-4 h-4 rounded border-gray-300 accent-[#256b3c]" />
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
@@ -351,7 +287,7 @@ const ProductosPage = () => {
                 </div>
               )}
 
-              {/* GRID DE PRODUCTOS (2 MÓVIL, 3 PC) */}
+              {/* GRID DE PRODUCTOS */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 {!loading && !error && productosProcesados.map((prod) => (
                   <div key={prod.id} className="bg-[#F9F6F0] rounded-[32px] p-4 md:p-6 shadow-sm border border-black/5 flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group/card">
@@ -443,6 +379,13 @@ const ProductosPage = () => {
                 .carousel-container:hover .animate-slide {
                   animation-play-state: paused;
                 }
+                @keyframes slideUpModal {
+                  from { transform: translateY(100%); }
+                  to { transform: translateY(0); }
+                }
+                .animate-slide-up-modal {
+                  animation: slideUpModal 0.3s ease-out forwards;
+                }
               `}
             </style>
             
@@ -472,6 +415,102 @@ const ProductosPage = () => {
 
       </div>
       <Footer />
+
+      {/* =========================================
+          BOTTOM BAR DE FILTROS (SOLO CELULAR)
+          ========================================= */}
+      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-[60] flex justify-around items-center px-2 py-3 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] pb-safe">
+        
+        {/* Botón Categorías */}
+        <button onClick={() => setBottomSheetActivo('categoria')} className={`flex flex-col items-center gap-1 w-1/3 transition-colors font-raleway ${bottomSheetActivo === 'categoria' || categoriasActivas.length > 0 ? 'text-[#256b3c]' : 'text-[#8a9096]'}`}>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h7" />
+          </svg>
+          <span className="text-[10px] font-bold">Categorías</span>
+        </button>
+
+        {/* Botón Especialidad (En lugar de Marcas) */}
+        <button onClick={() => setBottomSheetActivo('especialidad')} className={`flex flex-col items-center gap-1 w-1/3 transition-colors font-raleway ${bottomSheetActivo === 'especialidad' || especialidadesActivas.length > 0 ? 'text-[#256b3c]' : 'text-[#8a9096]'}`}>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+          <span className="text-[10px] font-bold">Especialidad</span>
+        </button>
+
+        {/* Botón Precio */}
+        <button onClick={() => setBottomSheetActivo('precio')} className={`flex flex-col items-center gap-1 w-1/3 transition-colors font-raleway ${bottomSheetActivo === 'precio' || precioFiltro < maxPrecioReal ? 'text-[#256b3c]' : 'text-[#8a9096]'}`}>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+          </svg>
+          <span className="text-[10px] font-bold">Precio</span>
+        </button>
+      </div>
+
+      {/* =========================================
+          BOTTOM SHEET MODAL (PANEL DESLIZABLE)
+          ========================================= */}
+      {bottomSheetActivo && (
+        <div className="fixed inset-0 z-[70] flex items-end justify-center lg:hidden">
+          {/* Fondo oscuro overlay */}
+          <div className="absolute inset-0 bg-[#1e3325]/40 backdrop-blur-sm transition-opacity" onClick={() => setBottomSheetActivo(null)}></div>
+          
+          {/* Contenedor blanco que sube */}
+          <div className="bg-white w-full rounded-t-3xl p-6 relative z-10 max-h-[80vh] flex flex-col shadow-2xl animate-slide-up-modal font-raleway">
+            
+            <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
+              <h3 className="text-xl font-bold text-[#1e3325] uppercase tracking-wide">
+                {bottomSheetActivo === 'categoria' && 'Categorías'}
+                {bottomSheetActivo === 'especialidad' && 'Especialidades'}
+                {bottomSheetActivo === 'precio' && 'Rango de Precio'}
+              </h3>
+              <button onClick={() => setBottomSheetActivo(null)} className="p-2 text-gray-400 hover:text-red-500 bg-gray-50 rounded-full">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Contenido del modal */}
+            <div className="overflow-y-auto pb-6">
+              
+              {bottomSheetActivo === 'categoria' && categoriasUnicas.map(cat => (
+                <button key={cat} onClick={() => { toggleFiltro(cat, 'categoria'); setBottomSheetActivo(null); }} className={`w-full text-left py-4 px-4 rounded-2xl transition-colors mb-2 ${categoriasActivas.includes(cat) ? 'bg-[#F9F6F0] text-[#256b3c] font-bold border border-[#256b3c]/20' : 'text-[#6b7280] bg-gray-50 hover:bg-gray-100'}`}>
+                  {cat}
+                </button>
+              ))}
+
+              {bottomSheetActivo === 'especialidad' && especialidadesUnicas.map(esp => (
+                <button key={esp} onClick={() => { toggleFiltro(esp, 'especialidad'); setBottomSheetActivo(null); }} className={`w-full text-left py-4 px-4 rounded-2xl transition-colors mb-2 ${especialidadesActivas.includes(esp) ? 'bg-[#F9F6F0] text-[#256b3c] font-bold border border-[#256b3c]/20' : 'text-[#6b7280] bg-gray-50 hover:bg-gray-100'}`}>
+                  {esp}
+                </button>
+              ))}
+
+              {bottomSheetActivo === 'precio' && (
+                <div className="flex flex-col gap-6 py-4 px-2">
+                  <div className="flex justify-between items-center text-[#1e3325] font-bold text-lg">
+                    <span>Hasta:</span>
+                    <span className="bg-[#F9F6F0] px-4 py-1.5 rounded-full text-[#256b3c]">S/ {precioFiltro}</span>
+                  </div>
+                  <input 
+                    type="range" 
+                    min="0" 
+                    max={maxPrecioReal} 
+                    step="10" 
+                    value={precioFiltro} 
+                    onChange={(e) => setPrecioFiltro(Number(e.target.value))} 
+                    className="w-full h-2.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#256b3c]" 
+                  />
+                  <button onClick={() => setBottomSheetActivo(null)} className="mt-8 w-full bg-[#1e3325] text-white py-4 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-[#256b3c] transition-colors shadow-md">
+                    Aplicar Precio
+                  </button>
+                </div>
+              )}
+
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

@@ -86,7 +86,7 @@ const Footer = () => {
               
               <li className="flex items-start gap-3 group">
                 <svg className="w-5 h-5 text-[#A3B18A] shrink-0 mt-0.5 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span className="font-medium">Lun-Sáb 9:00 am - 6:00 pm</span>
+                <span className="font-medium">Lun-Sáb 9:00 am - 8:00 pm</span>
               </li>
             
             </ul>

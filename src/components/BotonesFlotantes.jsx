@@ -25,7 +25,8 @@ const BotonesFlotantes = () => {
       {/* ========================================= */}
       {/* 1. BOTÓN GENERAL DE WHATSAPP CON MENSAJE */}
       {/* ========================================= */}
-      <div className="fixed bottom-6 right-6 z-40 flex items-center gap-4">
+      {/* Ajuste: mb-16 en móvil (sm) para no chocar con el bottom nav de filtros */}
+      <div className="fixed bottom-6 right-6 mb-16 lg:mb-0 z-40 flex items-center gap-4">
         
         {/* Burbuja de mensaje animada (se oculta en celulares muy pequeños para no estorbar) */}
         <div className="hidden sm:flex bg-white px-4 py-2.5 rounded-2xl shadow-[0_4px_15px_rgba(0,0,0,0.1)] border border-gray-100 items-center gap-2 animate-bounce relative">
@@ -56,9 +57,10 @@ const BotonesFlotantes = () => {
       {/* ========================================= */}
       {/* 2. BOTÓN FLOTANTE DEL CARRITO */}
       {/* ========================================= */}
+      {/* Ajuste: Subimos el botón del carrito en móvil con bottom-[150px] para que quede arriba del WhatsApp */}
       <button 
         onClick={() => setIsCartOpen(true)}
-        className="fixed bottom-[104px] right-6 bg-[#2E4B34] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(46,75,52,0.4)] hover:scale-110 hover:bg-[#1a2c1e] transition-all duration-300 z-40 flex items-center justify-center"
+        className="fixed bottom-[150px] lg:bottom-[104px] right-6 bg-[#2E4B34] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(46,75,52,0.4)] hover:scale-110 hover:bg-[#1a2c1e] transition-all duration-300 z-40 flex items-center justify-center"
       >
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -71,25 +73,17 @@ const BotonesFlotantes = () => {
       </button>
 
       {/* ========================================= */}
-      {/* 3. PANEL DEL CARRITO (CON ANIMACIONES Y CIERRE AL CLIC FUERA) */}
+      {/* 3. PANEL DEL CARRITO */}
       {/* ========================================= */}
-      
-      {/* Fondo oscuro (Overlay) */}
       <div 
         className={`fixed inset-0 bg-black/40 backdrop-blur-[2px] z-50 transition-all duration-300 ease-in-out ${isCartOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
-        onClick={() => setIsCartOpen(false)} // Cierra al clicar en lo negro
+        onClick={() => setIsCartOpen(false)}
       >
-        
-        {/* Contenedor posicionado a la derecha */}
         <div className="absolute inset-y-0 right-0 w-full max-w-md flex">
-          
-          {/* El Panel blanco que se desliza */}
           <div 
             className={`bg-white w-full h-full shadow-2xl flex flex-col transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}
-            onClick={(e) => e.stopPropagation()} // Evita que el clic aquí dentro cierre el modal
+            onClick={(e) => e.stopPropagation()}
           >
-            
-            {/* Header del carrito */}
             <div className="p-6 border-b border-gray-200 flex justify-between items-center bg-[#f8faf7]">
               <h2 className="text-xl font-bold text-[#2E4B34] flex items-center gap-2">
                 Tu Carrito ({totalItems})
@@ -102,7 +96,6 @@ const BotonesFlotantes = () => {
               </button>
             </div>
 
-            {/* Cuerpo del carrito */}
             <div className="flex-grow overflow-y-auto p-6">
               {carrito.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-gray-400 gap-4">
@@ -133,7 +126,6 @@ const BotonesFlotantes = () => {
               )}
             </div>
 
-            {/* Footer del carrito */}
             <div className="p-6 border-t border-gray-200 bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
               <div className="flex justify-between items-center mb-6">
                 <span className="text-gray-600 font-bold uppercase tracking-wider text-sm">Total a pagar:</span>

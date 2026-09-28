@@ -5,27 +5,10 @@ const ResultadosReales = () => {
   const [activeCase, setActiveCase] = useState(0);
   const [direction, setDirection] = useState('next');
 
-  // Se invirtió el orden: Hombre primero, Mujer después
+  // Datos corregidos: La paciente M.R. (Mujer) primero, y E.H. (Hombre) segundo
   const cases = [
     {
       tag: "CASO 1 - PROGRAMA METABÓLICO DE PESO",
-      name: "Paciente M.R.",
-      details: "39 años · 1.58 m · Endocrinología + Nutrición",
-      stats: [
-        { label: "Peso", value: "82 kg → 66 kg", highlight: "(-16 kg · -20%)" },
-        { label: "IMC", value: "32.8 → 26.4" },
-        { label: "Grasa corporal (InBody)", value: "38% → 28%" },
-        { label: "Masa muscular", value: "Mantenida" },
-        { label: "Duración", value: "26 semanas" }
-      ],
-      causa: "Hipotiroidismo subclínico + resistencia a la insulina",
-      tratamiento: "manejo de tiroides + plan nutricional + tratamiento médico supervisado (análogo de GLP-1) + seguimiento con InBody.",
-      quote: `"Me trataron la tiroides y la insulina, no solo el peso. Por eso esta vez sí se mantuvo."`,
-      imgAntes: "/antes-hombre.png",
-      imgDespues: "/despues-hombre.png"
-    },
-    {
-      tag: "CASO 2 - PROGRAMA METABÓLICO DE PESO",
       name: "Paciente E.H.",
       details: "47 años · 1.70 m · Endocrinología + Nutrición",
       stats: [
@@ -40,6 +23,23 @@ const ResultadosReales = () => {
       quote: `"Había intentado mil dietas. Recién cuando encontraron por qué mi cuerpo no bajaba, todo cambió."`,
       imgAntes: "/antes-mujer.png",
       imgDespues: "/despues-mujer.png"
+    },
+    {
+      tag: "CASO 2 - PROGRAMA METABÓLICO DE PESO",
+      name: "Paciente M.R.",
+      details: "39 años · 1.58 m · Endocrinología + Nutrición",
+      stats: [
+        { label: "Peso", value: "82 kg → 66 kg", highlight: "(-16 kg · -20%)" },
+        { label: "IMC", value: "32.8 → 26.4" },
+        { label: "Grasa corporal (InBody)", value: "38% → 28%" },
+        { label: "Masa muscular", value: "Mantenida" },
+        { label: "Duración", value: "26 semanas" }
+      ],
+      causa: "Hipotiroidismo subclínico + resistencia a la insulina",
+      tratamiento: "manejo de tiroides + plan nutricional + tratamiento médico supervisado (análogo de GLP-1) + seguimiento con InBody.",
+      quote: `"Me trataron la tiroides y la insulina, no solo el peso. Por eso esta vez sí se mantuvo."`,
+      imgAntes: "/antes-hombre.png",
+      imgDespues: "/despues-hombre.png"
     }
   ];
 
@@ -141,11 +141,12 @@ const ResultadosReales = () => {
                   ))}
                 </div>
 
-                <div className="bg-[#0A160F]/60 p-5 rounded-2xl border border-[#294B37]/60 mb-6 backdrop-blur-sm">
-                  <span className="font-raleway text-[9px] font-bold tracking-widest text-[#4ADE80] uppercase block mb-2 opacity-80">
+                {/* NUEVO FONDO CLARO PARA CAUSA DE FONDO DETECTADA */}
+                <div className="bg-[#F9F6F0]/90 p-5 rounded-2xl border border-white/20 mb-6 backdrop-blur-md shadow-lg">
+                  <span className="font-raleway text-[10px] font-bold tracking-widest text-[#256b3c] uppercase block mb-2">
                     CAUSA DE FONDO DETECTADA
                   </span>
-                  <p className="font-raleway text-white font-bold text-[14px]">
+                  <p className="font-raleway text-[#1e3325] font-bold text-[14px]">
                     {currentCase.causa}
                   </p>
                 </div>
@@ -185,7 +186,7 @@ const ResultadosReales = () => {
                   DESPUÉS
                 </div>
 
-                {/* Línea divisoria (Se le quitó el transition-all para que no tenga lag) */}
+                {/* Línea divisoria */}
                 <div className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_15px_rgba(0,0,0,0.5)] pointer-events-none" style={{ left: `calc(${sliderPos}% - 2px)` }}>
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shadow-2xl border border-gray-100">
                     <svg className="w-5 h-5 md:w-6 md:h-6 text-[#112318]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,7 +195,7 @@ const ResultadosReales = () => {
                   </div>
                 </div>
 
-                {/* Input rango invisible que controla todo (optimizado para touch) */}
+                {/* Input rango invisible que controla todo */}
                 <input 
                   type="range" 
                   min="0" max="100" 
